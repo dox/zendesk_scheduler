@@ -2,7 +2,7 @@
 A simple web-based utility to create and manage reoccurring zendesk ticket creation
 
 ## Getting Started
-![Screenshot](/views/screenshot-01.png)
+![Screenshot](/views/screenshot_01.png)
 
 ## Installation
 * Copy the directory to your webserver
