@@ -3,4 +3,5 @@ define ("db_host", "localhost");
 define ("db_database", "YOUR-DATABASE-NAME");
 define ("db_user", "YOUR-MYSQL-USERNAME");
 define ("db_password", "YOUR-PASSWORD");
+define ("zendesk_url","https://YOURSUBDOMAINHERE.zendesk.com");
 ?>
