@@ -36,7 +36,7 @@ $teamMembersDisabled = $team->team_all_disabled();
 	<button type="button" class="btn btn-primary btn-lg float-right" id="showAddTeam">Add New</button>
 	<div id="AddTeam" hidden>
 		<h4>Add New Team Member</h4>
-	    <form action="team.php" method="post">
+	    <form action="agents.php" method="post">
 	    <div class="form-group">
 	    	<label for="inputFirstname">First Name</label>
 	    	<input type="text" class="form-control" id="inputFirstname" name="inputFirstname" placeholder="First Name">

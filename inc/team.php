@@ -108,7 +108,7 @@ public function member_display() {
 	$output .= "<b>" . $this->firstname . " " . $this->lastname . "</b>";
 	$output .= " <span class=\"badge badge-secondary\">" . $this->jobs_count() . "</span>";
 	$output .= " <i>(" . $this->email . ")</i>";
-	$output .= "<a href=\"team_edit.php?member=" . $this->uid . "\" class=\"btn btn-outline-primary btn-sm float-right\">Modify</a>";
+	$output .= "<a href=\"agent_edit.php?member=" . $this->uid . "\" class=\"btn btn-outline-primary btn-sm float-right\">Modify</a>";
 	$output .= "</div>";
 	
 	return $output;

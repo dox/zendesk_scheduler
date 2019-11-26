@@ -41,7 +41,7 @@ if (!empty($_POST)) {
 	
 	<div class="row">
 		<div class="col-lg-6">
-			<form action="team_edit.php?member=<?php echo $teamMember->uid; ?>" method="post">
+			<form action="agent_edit.php?member=<?php echo $teamMember->uid; ?>" method="post">
 			<div class="form-group">
 				<label for="inputFirstname">First Name</label>
 				<input type="text" class="form-control" name="inputFirstname" placeholder="First Name" value="<?php echo $teamMember->firstname; ?>">
@@ -99,7 +99,7 @@ $(function() {
     $('#deleteJob').click(function(e) {
         e.preventDefault();
         if (window.confirm("Are you sure?")) {
-            location.href = 'team.php?memberDelete=<?php echo $teamMember->uid; ?>';
+            location.href = 'agents.php?memberDelete=<?php echo $teamMember->uid; ?>';
         }
     });
 });
