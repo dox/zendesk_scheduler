@@ -119,6 +119,18 @@ public static function jobs_monthly() {
 	//return !empty($results) ? array_shift($results) : false;
 }
 
+public static function jobs_yearly() {
+	global $database;
+	
+	$sql  = "SELECT * FROM " . self::$table_name . " ";
+	$sql .= "WHERE frequency = 'Yearly';";
+	
+	$results = self::find_by_sql($sql);
+	
+	return $results;
+	//return !empty($results) ? array_shift($results) : false;
+}
+
 public static function jobs_assigned($zendesk_id = null) {
 	global $database;
 	
