@@ -7,7 +7,7 @@ $team = new team();
 $teamMember = $team->member($_GET['member']);
 
 $jobs = new jobs();
-$jobsAssigned = $jobs->jobs_assigned($teamMember->zendesk_id);
+$jobsAssigned = $jobs->jobs_involved_with($teamMember->zendesk_id);
 
 if (!empty($_POST)) {
 	$teamMember->firstname = $_POST['inputFirstname'];
@@ -37,10 +37,9 @@ if (!empty($_POST)) {
 <body>
 <?php include_once("views/navbar.php"); ?>
 <div class="container">	
-	<h4>Modify Team Member <i>(<?php echo $teamMember->firstname . " " . $teamMember->lastname; ?>)</i></h4>
-	
 	<div class="row">
 		<div class="col-lg-6">
+			<h4>Modify Team Member <i>(<?php echo $teamMember->firstname . " " . $teamMember->lastname; ?>)</i></h4>
 			<form action="agent_edit.php?member=<?php echo $teamMember->uid; ?>" method="post">
 			<div class="form-group">
 				<label for="inputFirstname">First Name</label>
@@ -71,13 +70,14 @@ if (!empty($_POST)) {
 				echo "<button id=\"deleteJob\" type=\"submit\" class=\"btn btn-danger\">Delete</button>";
 			} else {
 				echo "<button id=\"deleteJob\" disabled type=\"submit\" class=\"btn btn-danger\">Delete</button>";
-				echo "<p>* User cannot be deleted when there are jobs assigned to them</p>";
+				echo "<p>* User cannot be deleted when there are jobs assigned to/logged by them</p>";
 			}
 			?>
 			
 			</form>
 		</div>
 		<div class="col-lg-6">
+			<h4>Jobs assigned to/logged by:</h4>
 			<?php
 			foreach($jobsAssigned AS $job) {
 				echo $job->job_display();

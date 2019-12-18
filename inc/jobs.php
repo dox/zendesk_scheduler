@@ -143,6 +143,18 @@ public static function jobs_assigned($zendesk_id = null) {
 	//return !empty($results) ? array_shift($results) : false;
 }
 
+public static function jobs_involved_with($zendesk_id = null) {
+	global $database;
+	
+	$sql  = "SELECT * FROM " . self::$table_name . " ";
+	$sql .= "WHERE assign_to = '" . $zendesk_id . "' ";
+	$sql .= "OR logged_by = '" . $zendesk_id . "';";
+	
+	$results = self::find_by_sql($sql);
+	
+	return $results;
+}
+
 public function job_display() {
 	$team = new team();
 	$teamMember = $team->member($this->assign_to);
