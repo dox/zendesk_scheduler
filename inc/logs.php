@@ -118,8 +118,14 @@ public function display_log() {
 public function delete_old_logs() {
 	global $database;
 	
+	if (defined("log_retention")) {
+		$logAge = log_retention;
+	} else {
+		$logAge = "180";
+	}
+	
 	$sql  = "DELETE FROM " . self::$table_name . " ";
-	$sql .= "WHERE DATEDIFF(NOW(), date_added) > 180";
+	$sql .= "WHERE DATEDIFF(NOW(), date_added) > " . $logAge;
 	
 	// check if the database entry was successful (by attempting it)
 	if ($database->query($sql)) {
