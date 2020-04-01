@@ -18,6 +18,7 @@ public $frequency2;
 public $assign_to;
 public $logged_by;
 public $cc;
+public $status;
 
 private static function instantiate($record) {
 	$object = new self;
@@ -159,7 +160,13 @@ public function job_display() {
 	$team = new team();
 	$teamMember = $team->member($this->assign_to);
 	
-	$output  = "<div class=\"alert alert-info clearfix\" role=\"alert\">";
+	if ($this->status == "Enabled") {
+		$class = "alert-info";
+	} else {
+		$class = "alert-secondary";
+	}
+	
+	$output  = "<div class=\"alert " . $class . " clearfix\" role=\"alert\">";
 	$output .= "<b>" . $this->type . ":</b> ";
 	$output .= $this->subject;
 	$output .= " <i>(" . $teamMember->firstname . " " . $teamMember->lastname . ")</i>";
@@ -173,7 +180,7 @@ public function job_create() {
 	global $database;
 
 	$sql  = "INSERT INTO " . self::$table_name . " (";
-	$sql .= "subject, body, type, priority, tags, frequency, frequency2, assign_to, cc, logged_by";
+	$sql .= "subject, body, type, priority, tags, frequency, frequency2, assign_to, cc, status, logged_by";
 	$sql .= ") VALUES ('";
 	$sql .= $database->escape_value($this->subject) . "', '";
 	$sql .= $database->escape_value($this->body) . "', '";
@@ -184,6 +191,7 @@ public function job_create() {
 	$sql .= $database->escape_value($this->frequency2) . "', '";
 	$sql .= $database->escape_value($this->assign_to) . "', '";
 	$sql .= $database->escape_value($this->cc) . "', '";
+	$sql .= $database->escape_value($this->status) . "', ";
 	$sql .= $database->escape_value($this->logged_by) . "')";
 	
 	// check if the database entry was successful (by attempting it)
@@ -242,7 +250,8 @@ public function job_update() {
 	$sql .= "frequency2 = '" . $database->escape_value($this->frequency2) . "', ";
 	$sql .= "logged_by = '" . $database->escape_value($this->logged_by) . "', ";
 	$sql .= "cc = '" . $database->escape_value($this->cc) . "', ";
-	$sql .= "assign_to = '" . $database->escape_value($this->assign_to) . "' ";
+	$sql .= "assign_to = '" . $database->escape_value($this->assign_to) . "', ";
+	$sql .= "status = '" . $database->escape_value($this->status) . "' ";
 	$sql .= "WHERE uid = '" . $this->uid . "' ";
 	$sql .= "LIMIT 1;";
 	

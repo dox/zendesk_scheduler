@@ -19,7 +19,15 @@ foreach($jobs_yearly AS $job) {
 	
 	foreach ($freqArray AS $dateToRun) {
 		if ($dateToRun == strtoupper(date('M-d'))) {
-			$job->create_zendesk_ticket();
+			if ($job->status == "Enabled") {
+				$job->create_zendesk_ticket();
+			}
+			else {
+				$logRecord = new logs();
+				$logRecord->description = "Didn't create job: " . $job->subject . " (" . $job->uid . ") because it was disabled.";
+				$logRecord->type = "info";
+				$logRecord->log_record();
+			}
 		}
 	}
 	

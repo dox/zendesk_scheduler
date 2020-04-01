@@ -6,9 +6,6 @@ A simple web-based utility to create and manage reoccurring zendesk ticket creat
 
 ## Installation
 * Copy the directory to your webserver
-```
-git clone https://github.com/dox/zendesk_scheduler.git
-```
 * Create a database in mysql and in it run the 'mysql_import.sql' file.  This will create the structure for the database
 * Go to your web server via HTTP and add your Zendesk agents (you'll need each Agent's ID, as it exists in your Zendesk)
 * Add jobs

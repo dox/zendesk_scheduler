@@ -20,6 +20,7 @@ if (!empty($_POST)) {
 	$job->assign_to = $_POST['inputAssignTo'];
 	$job->logged_by = $_POST['inputLoggedBy'];
 	$job->cc = $_POST['inputCC'];
+	$job->status = $_POST['inputStatus'];
 	
 	if ($job->job_update()) {
 		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Job Updated!</div>";
@@ -46,6 +47,13 @@ if (!empty($_POST)) {
 		<div class="form-group">
 			<label for="inputBody">Message Body</label>
 			<textarea class="form-control" rows="7" name="inputBody" placeholder="Message"><?php echo $job->body; ?></textarea>
+		</div>
+		<div class="form-group">
+			<label for="inputStatus">Status</label>
+			<select class="form-control" name="inputStatus">
+				<option value="Enabled" <?php if ($job->status == "Enabled") { echo " selected";}?>>Enabled</option>
+				<option value="Disabled" <?php if ($job->status == "Disabled") { echo " selected";}?>>Disabled</option>
+			</select>
 		</div>
 		<div class="form-group">
 			<label for="inputType">Type</label>
