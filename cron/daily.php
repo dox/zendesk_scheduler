@@ -11,7 +11,14 @@ $jobs_daily = $jobs->jobs_daily();
 $jobs_yearly = $jobs->jobs_yearly();
 
 foreach($jobs_daily AS $job) {
-	$job->create_zendesk_ticket();
+	if ($job->status == "Enabled") {
+		$job->create_zendesk_ticket();
+	} else {
+		$logRecord = new logs();
+		$logRecord->description = "Didn't create job: " . $job->subject . " (" . $job->uid . ") because it was disabled.";
+		$logRecord->type = "info";
+		$logRecord->log_record();
+	}
 }
 
 foreach($jobs_yearly AS $job) {
