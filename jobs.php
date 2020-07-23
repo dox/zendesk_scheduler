@@ -22,7 +22,7 @@ if (!empty($_POST)) {
 if (isset($_GET['jobDelete'])) {
 	$jobsDelete = new jobs();
 	$jobsDelete->uid = $_GET['jobDelete'];
-	
+
 	if ($jobsDelete->job_delete()) {
 		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Job Deleted</div>";
 	} else {
@@ -33,8 +33,8 @@ if (isset($_GET['jobDelete'])) {
 if (isset($_GET['jobRun'])) {
 	$jobRun = new jobs();
 	$jobRun = $jobRun->job($_GET['jobRun']);
-	
-	
+
+
 	if ($jobRun->create_zendesk_ticket()) {
 		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Manually run job</div>";
 	} else {
@@ -54,11 +54,11 @@ $teamMembers = $team->team_all_enabled();
 ?>
 <body>
 <?php include_once("views/navbar.php"); ?>
-<div class="container">	
-	
-	<button type="button" class="btn btn-primary btn-lg float-right" id="showAddJob">Add New</button>
+<div class="container" role="main">
+
+	<button type="button" class="btn btn-success btn-lg float-right" id="showAddJob">Add New</button>
 	<div id="AddJob" hidden><!-- hiding box -->
-		<h4>Add New Job</h4>
+		<h1>Add New Job</h1>
 		<form action="jobs.php" method="post">
 		<div class="form-group">
 			<label for="inputSubject">Subject</label>
@@ -95,7 +95,7 @@ $teamMembers = $team->team_all_enabled();
 						$output .= " selected";
 					}
 					$output .= ">" . $member->firstname . " " . $member->lastname . "</option>";
-					
+
 					echo $output;
 				}
 				?>
@@ -111,7 +111,7 @@ $teamMembers = $team->team_all_enabled();
 						$output .= " selected";
 					}
 					$output .= ">" . $member->firstname . " " . $member->lastname . "</option>";
-					
+
 					echo $output;
 				}
 				?>
@@ -142,32 +142,32 @@ $teamMembers = $team->team_all_enabled();
 		<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div><!-- end hiding box -->
-	
-	<h4>Daily</h4>
+
+	<h1>Daily</h1>
 	<p>These tasks will appear on Zendesk at 00:00 every day (Monday - Friday).</p>
 	<?php
 	foreach($jobs_daily AS $job) {
 		echo $job->job_display();
 	}
 	?>
-	
-	<h4>Weekly</h4>
+
+	<h1>Weekly</h1>
 	<p>These tasks will appear on Zendesk at 00:00 every Monday morning.</p>
 	<?php
 	foreach($jobs_weekly AS $job) {
 		echo $job->job_display();
 	}
 	?>
-	
-	<h4>Monthly</h4>
+
+	<h1>Monthly</h1>
 	<p>These tasks will appear on Zendesk at 00:00 on the 1st of every month.</p>
 	<?php
 	foreach($jobs_monthly AS $job) {
 		echo $job->job_display();
 	}
 	?>
-	
-	<h4>Yearly</h4>
+
+	<h1>Yearly</h1>
 	<p>These tasks will appear on Zendesk at 00:00 once every year on the date(s) specified.</p>
 	<?php
 	foreach($jobs_yearly AS $job) {
@@ -175,7 +175,7 @@ $teamMembers = $team->team_all_enabled();
 		echo $job->job_display();
 	}
 	?>
-	
+
 	<?php include_once("views/footer.php"); ?>
 </div> <!-- /container -->
 </body>
@@ -194,6 +194,6 @@ $('select[name="inputFrequency"]').change(function(){
 		$('#Frequency2').prop('hidden', false);
 	} else {
 		$('#Frequency2').prop('hidden', true);
-	}  
+	}
 })
 </script>
