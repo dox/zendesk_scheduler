@@ -328,6 +328,17 @@ public function create_zendesk_ticket() {
 	}
 }
 
+public static function jobs_oneoff() {
+        global $database;
+
+        $sql  = "SELECT * FROM " . self::$table_name . " ";
+        $sql .= "WHERE frequency = 'one';";
+
+        $results = self::find_by_sql($sql);
+
+        return $results;
+        //return !empty($results) ? array_shift($results) : false;
+}
 
 }
 ?>
