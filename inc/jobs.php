@@ -191,9 +191,9 @@ public function job_create() {
 	$sql .= $database->escape_value($this->frequency2) . "', '";
 	$sql .= $database->escape_value($this->assign_to) . "', '";
 	$sql .= $database->escape_value($this->cc) . "', '";
-	$sql .= $database->escape_value($this->status) . "', ";
+	$sql .= $database->escape_value($this->status) . "', '";
 	$sql .= $database->escape_value($this->logged_by) . "')";
-
+	
 	// check if the database entry was successful (by attempting it)
 	if ($database->query($sql)) {
 		$logRecord = new logs();
