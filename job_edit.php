@@ -21,7 +21,7 @@ if (!empty($_POST)) {
 	$job->logged_by = $_POST['inputLoggedBy'];
 	$job->cc = $_POST['inputCC'];
 	$job->status = $_POST['inputStatus'];
-	
+
 	if ($job->job_update()) {
 		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Job Updated!</div>";
 	} else {
@@ -34,107 +34,123 @@ if (!empty($_POST)) {
 ?>
 <body>
 <?php include_once("views/navbar.php"); ?>
-<div class="container">	
-	
-	<div class="row marketing">
-		<div class="col-lg-12">
-		<h4>Modify Job <i>(UID: <?php echo $job->uid; ?>)</i></h4>
-		<form action="job_edit.php?job=<?php echo $job->uid; ?>" method="post">
-		<div class="form-group">
-			<label for="inputSubject">Subject</label>
-			<input type="text" class="form-control" name="inputSubject" placeholder="Subject" value="<?php echo $job->subject; ?>">
-		</div>
-		<div class="form-group">
-			<label for="inputBody">Message Body</label>
-			<textarea class="form-control" rows="7" name="inputBody" placeholder="Message"><?php echo $job->body; ?></textarea>
-		</div>
-		<div class="form-group">
-			<label for="inputStatus">Status</label>
-			<select class="form-control" name="inputStatus">
-				<option value="Enabled" <?php if ($job->status == "Enabled") { echo " selected";}?>>Enabled</option>
-				<option value="Disabled" <?php if ($job->status == "Disabled") { echo " selected";}?>>Disabled</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="inputType">Type</label>
-			<select class="form-control" name="inputType">
-				<option value="Question" <?php if ($job->type == "Question") { echo " selected";}?>>Question</option>
-				<option value="Problem" <?php if ($job->type == "Problem") { echo " selected";}?>>Problem</option>
-				<option value="Task" <?php if ($job->type == "Task") { echo " selected";}?>>Task</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="inputPriority">Priority</label>
-			<select class="form-control" name="inputPriority">
-				<option value="Low" <?php if ($job->priority == "Low") { echo " selected";}?>>Low</option>
-				<option value="Normal" <?php if ($job->priority == "Normal") { echo " selected";}?>>Normal</option>
-				<option value="High" <?php if ($job->priority == "High") { echo " selected";}?>>High</option>
-				<option value="Urgent" <?php if ($job->priority == "Urgent") { echo " selected";}?>>Urgent</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="inputAssignTo">Auto Assign To</label>
-		    <select class="form-control" id="inputAssignTo" name="inputAssignTo">
-		    	<?php
-				foreach ($teamMembers AS $member) {
-					$output  = "<option value=\"" . $member->zendesk_id . "\"";
-					if ($job->assign_to == $member->zendesk_id) {
-						$output .= " selected";
-					}
-					$output .= ">" . $member->firstname . " " . $member->lastname . "</option>";
-					
-					echo $output;
-				}
-				?>
-		    </select>
-		</div>
-		<div class="form-group">
-			<label for="inputAssignTo">Logged By</label>
-		    <select class="form-control" id="inputLoggedBy" name="inputLoggedBy">
-		    	<?php
-				foreach ($teamMembers AS $member) {
-					$output  = "<option value=\"" . $member->zendesk_id . "\"";
-					if ($job->logged_by == $member->zendesk_id) {
-						$output .= " selected";
-					}
-					$output .= ">" . $member->firstname . " " . $member->lastname . "</option>";
-					
-					echo $output;
-				}
-				?>
-		    </select>
-		</div>
-		<div class="form-group">
-			<label for="inputCC">CC (email addresses)</label>
-			<input type="text" class="form-control" id="inputCC" name="inputCC" placeholder="CC (email addresses)" value="<?php echo $job->cc; ?>">
-		</div>
-		<div class="form-group">
-			<label for="inputTags">Tags</label>
-			<input type="text" class="form-control" name="inputTags" placeholder="Tags" value="<?php echo $job->tags; ?>">
-		</div>
-		<div class="form-group">
-			<label for="inputFrequency">Frequency</label>
-			<select class="form-control" name="inputFrequency">
-				<option value="Daily" <?php if ($job->frequency == "Daily") { echo " selected";}?>>Daily</option>
-				<option value="Weekly" <?php if ($job->frequency == "Weekly") { echo " selected";}?>>Weekly</option>
-				<option value="Monthly" <?php if ($job->frequency == "Monthly") { echo " selected";}?>>Monthly</option>
-				<option value="Yearly" <?php if ($job->frequency == "Yearly") { echo " selected";}?>>Yearly</option>
-			</select>
-		</div>
-		<div id="Frequency2" class="form-group" <?php if ($job->frequency <> 'Yearly') { echo 'hidden'; } ?>>
-			<label for="inputFrequency2">Frequency2</label>
-			<input type="text" class="form-control" name="inputFrequency2" placeholder="Frequency2" value="<?php echo strtoupper($job->frequency2); ?>">
-			<small id="inputFrequency2Help" class="form-text text-muted">The day of the year you want this task to run, written in the format '<?php echo strtoupper(date('M-d'));?>' (with leading zeros).<br />Specify multiple dates by using a comma to separate them (no spaces!) like: '<?php echo strtoupper(date('M-d')) ."," . strtoupper(date('M-d',strtotime(' +1 day')));?>'</small>
-		</div>
-		<button type="submit" class="btn btn-primary">Modify</button>
-		<button id="deleteJob" type="submit" class="btn btn-danger float-right">Delete</button>
-		<button id="runJob" type="submit" class="btn btn-warning">Run Now</button>
-</form>
-		</div>
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
+		<h1 class="display-4">Ticket Modify <small class="text-muted">[uid:<?php echo $job->uid; ?>]</small></h1>
+		<p class="lead"><?php echo $job->subject; ?></p>
 	</div>
-	
+
+	<div class="pb-3 text-right">
+		<a class="btn btn-warning" id="runJob" href="index.php?n=admin_meal" role="button" data-toggle="modal" data-target="#staticBackdrop">
+			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-repeat" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+				<path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+			</svg> Run Now
+		</a>
+		<a class="btn btn-danger" id="deleteJob" href="index.php?n=admin_meal" role="button" data-toggle="modal" data-target="#staticBackdrop">
+			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+				<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+			</svg> Delete
+		</a>
+	</div>
+
+	<form action="job_edit.php?job=<?php echo $job->uid; ?>" method="post">
+	<div class="mb-3">
+		<label for="inputSubject" class="form-label">Ticket Subject</label>
+		<input type="text" class="form-control" id="inputSubject" name="inputSubject" value="<?php echo $job->subject; ?>">
+	</div>
+	<div class="mb-3">
+		<label for="inputBody" class="form-label">Ticket Body</label>
+		<textarea class="form-control" rows="3" id="inputBody" name="inputBody"><?php echo $job->body; ?></textarea>
+	</div>
+	<div class="mb-3">
+		<label for="inputType" class="form-label">Ticket Type</label>
+		<select class="form-select" id="inputType" name="inputType">
+			<option value="Question" <?php if ($job->type == "Question") { echo " selected";}?>>Question</option>
+			<option value="Problem" <?php if ($job->type == "Problem") { echo " selected";}?>>Problem</option>
+			<option value="Task"<?php if ($job->type == "Task") { echo " selected";}?> >Task</option>
+		</select>
+	</div>
+	<div class="mb-3">
+		<label for="inputPriority" class="form-label">Ticket Priority</label>
+		<select class="form-select" id="inputPriority" name="inputPriority">
+			<option value="Low" <?php if ($job->priority == "Low") { echo " selected";}?>>Low</option>
+			<option value="Normal" <?php if ($job->priority == "Normal") { echo " selected";}?>>Normal</option>
+			<option value="High" <?php if ($job->priority == "High") { echo " selected";}?>>High</option>
+			<option value="Urgent" <?php if ($job->priority == "Urgent") { echo " selected";}?>>Urgent</option>
+		</select>
+	</div>
+	<div class="mb-3">
+		<label for="inputLoggedBy" class="form-label">Ticket Logged By</label>
+		<select class="form-select" id="inputLoggedBy" name="inputLoggedBy">
+			<?php
+			foreach ($teamMembers AS $member) {
+				$output  = "<option value=\"" . $member->zendesk_id . "\"";
+				if ($job->logged_by == $member->zendesk_id) {
+					$output .= " selected";
+				}
+				$output .= ">" . $member->firstname . " " . $member->lastname . "</option>";
+
+				echo $output;
+			}
+			?>
+		</select>
+	</div>
+	<div class="mb-3">
+		<label for="inputAssignTo" class="form-label">Auto-assign To Agent</label>
+		<select class="form-select" id="inputAssignTo" name="inputAssignTo">
+			<?php
+			foreach ($teamMembers AS $member) {
+				$output  = "<option value=\"" . $member->zendesk_id . "\"";
+				if ($job->assign_to == $member->zendesk_id) {
+					$output .= " selected";
+				}
+				$output .= ">" . $member->firstname . " " . $member->lastname . "</option>";
+
+				echo $output;
+			}
+			?>
+		</select>
+	</div>
+	<div class="mb-3">
+		<label for="inputCC" class="form-label">Ticket CC</label>
+		<input type="text" class="form-control" id="inputCC" name="inputCC" aria-describedby="inputCCHelp" value="<?php echo $job->cc; ?>">
+		<div id="inputCCHelp" class="form-text">Comma-seperated list of email addresses to CC into this ticket.</div>
+	</div>
+	<div class="mb-3">
+		<label for="inputTags" class="form-label">Ticket Tags</label>
+		<input type="text" class="form-control" id="inputTags" name="inputTags" aria-describedby="inputTagsHelp" value="<?php echo $job->tags; ?>">
+		<div id="inputTagsHelp" class="form-text">Comma-seperated list of tags to include into this ticket.</div>
+	</div>
+	<div class="mb-3">
+		<label for="inputFrequency" class="form-label">Ticket Frequency</label>
+		<select class="form-select" id="inputFrequency" name="inputFrequency" onchange="toggleFrequency2()">
+			<option value="Daily" <?php if ($job->frequency == "Daily") { echo " selected";}?>>Daily</option>
+			<option value="Weekly" <?php if ($job->frequency == "Weekly") { echo " selected";}?>>Weekly</option>
+			<option value="Monthly" <?php if ($job->frequency == "Monthly") { echo " selected";}?>>Monthly</option>
+			<option value="Yearly" <?php if ($job->frequency == "Yearly") { echo " selected";}?>>Yearly</option>
+		</select>
+	</div>
+	<div class="mb-3" id="inputFrequency2Div" <?php if ($job->frequency <> 'Yearly') { echo 'hidden'; } ?>>
+		<label for="inputFrequency2" class="form-label">Yearly Frequency</label>
+		<input type="text" class="form-control" id="inputFrequency2" name="inputFrequency2" aria-describedby="inputFrequency2Help" value="<?php echo strtoupper($job->frequency2); ?>">
+		<div id="inputFrequency2Help" class="form-text">The day of the year you want this task to run, written in the format '<?php echo strtoupper(date('M-d'));?>' (with leading zeros).<br />Specify multiple dates by using a comma to separate them (no spaces!) like: '<?php echo strtoupper(date('M-d')) ."," . strtoupper(date('M-d',strtotime(' +1 day')));?>'.</div>
+	</div>
+	<div class="mb-3">
+		<label for="inputStatus" class="form-label">Ticket Status</label>
+		<select class="form-select" id="inputStatus" name="inputStatus">
+			<option value="Enabled" <?php if ($job->status == "Enabled") { echo " selected";}?>>Enabled</option>
+			<option value="Disabled" <?php if ($job->status == "Disabled") { echo " selected";}?>>Disabled</option>
+		</select>
+	</div>
+	<button type="submit" class="btn btn-primary">Modify</button>
+
+	</form>
+
 	<?php include_once("views/footer.php"); ?>
-	
+
 	</div> <!-- /container -->
 </body>
 </html>
@@ -160,11 +176,13 @@ $(function() {
     });
 });
 
-$('select[name="inputFrequency"]').change(function(){
-	if ($(this).val() == "Yearly"){
-		$('#Frequency2').prop('hidden', false);
+function toggleFrequency2() {
+	d = document.getElementById("inputFrequency").value;
+
+	if (d == "Yearly"){
+		$('#inputFrequency2Div').prop('hidden', false);
 	} else {
-		$('#Frequency2').prop('hidden', true);
-	}  
-})
+		$('#inputFrequency2Div').prop('hidden', true);
+	}
+}
 </script>

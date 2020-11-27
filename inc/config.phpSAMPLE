@@ -4,5 +4,10 @@ define ("db_database", "YOUR-DATABASE-NAME");
 define ("db_user", "YOUR-MYSQL-USERNAME");
 define ("db_password", "YOUR-PASSWORD");
 
-define ("log_retention", "180"); // days to keep logs
+define ("zd_url", "https://your-zd-domain.zendesk.com");
+define ("zd_subdomain", "your-zd-domain");
+define ("zd_username", "your-email@domain.com");
+define ("zd_token", "API_TOKEN(NOT-PASSWORD!)");
+
+define ("log_retention", 180); // days to keep logs
 ?>

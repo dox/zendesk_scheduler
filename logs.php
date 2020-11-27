@@ -9,24 +9,38 @@ $logsAll = $logs->find_all();
 
 <body>
 <?php include_once("views/navbar.php"); ?>
-<div class="container">	
-	
-	<p>A copy of the current <b>crontab -e</b>:</p>
-	<samp>
-		0 0 * * MON-FRI php -f /var/www/html/zendesk/cron/daily.php
-		0 0 * * MON php -f /var/www/html/zendesk/cron/weekly.php
-		0 0 1 * * php -f /var/www/html/zendesk/cron/monthly.php
-	</samp>
-	
-	<h4>Logs</h4>
-	<?php
-	foreach ($logsAll AS $log) {
-		echo $log->display_log();
-	}
-	?>
-	
+
+<div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
+		<h1 class="display-4">Logs</h1>
+		<p class="lead">Logs for cron tasks, ticket reation and agent changes.</p>
+	</div>
+
+	<p>Example <b>crontab -e</b>:</p>
+	<code>0 0 * * MON-FRI php -f /var/www/html/zendesk/cron/daily.php</code><br />
+	<code>0 0 * * MON php -f /var/www/html/zendesk/cron/weekly.php</code><br />
+	<code>0 0 1 * * php -f /var/www/html/zendesk/cron/monthly.php</code><br />
+
+	<hr />
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<td width="200px">Date</td>
+				<td>Description</td>
+				<td>Other</td>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+			foreach ($logsAll AS $log) {
+				echo $log->display_log();
+			}
+			?>
+		</tbody>
+	</table>
+
 	<?php include_once("views/footer.php"); ?>
 </div> <!-- /container -->
 </body>
 </html>
-

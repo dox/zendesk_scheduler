@@ -193,7 +193,7 @@ public function job_create() {
 	$sql .= $database->escape_value($this->cc) . "', '";
 	$sql .= $database->escape_value($this->status) . "', '";
 	$sql .= $database->escape_value($this->logged_by) . "')";
-	
+
 	// check if the database entry was successful (by attempting it)
 	if ($database->query($sql)) {
 		$logRecord = new logs();
@@ -311,20 +311,20 @@ public function create_zendesk_ticket() {
 		$logRecord->description = "Successfully ran " . strtolower($this->frequency) . " task  '" . $this->subject . "' (" . $this->uid . ")";
 		$logRecord->type = "cron";
 		$logRecord->log_record();
-
-		echo "running complete";
-
+		
 		// Show result
-		echo "<pre>";
-		print_r($newTicket);
-		echo "</pre>";
+		//echo "running complete";
+		//echo "<pre>";
+		//print_r($newTicket);
+		//echo "</pre>";
+		return true;
 	} catch (\Zendesk\API\Exceptions\ApiResponseException $e) {
 		$logRecord = new logs();
 		$logRecord->description = "Error running " . $this->frequency . "task  '" . $this->subject . "' (" . $this->uid . ") " . $e->getMessage();
 		$logRecord->type = "error";
 		$logRecord->log_record();
 
-		echo $e->getMessage().'</br>';
+		return $e->getMessage().'</br>';
 	}
 }
 

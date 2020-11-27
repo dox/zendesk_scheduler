@@ -1,6 +1,6 @@
 <footer class="text-muted">
 	<p class="float-right"><a href="#">Back to top</a></p>
-	<p>&copy; 2017-2019 Andrew Breakspear</p>
+	<p>&copy; 2017-<?php echo date('Y');?> Andrew Breakspear</p>
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
