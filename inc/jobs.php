@@ -1,6 +1,4 @@
 <?php
-$rootDir = dirname(__DIR__, 1);
-include($rootDir . "/vendor/autoload.php");
 use Zendesk\API\HttpClient as ZendeskAPI;
 
 class jobs {
@@ -170,7 +168,7 @@ public function job_display() {
 	$output .= "<strong>" . $this->type . ":</strong> ";
 	$output .= $this->subject;
 	$output .= " <em>(" . $teamMember->firstname . " " . $teamMember->lastname . ")</em>";
-	$output .= "<a href=\"job_edit.php?job=" . $this->uid . "\" class=\"btn btn-outline-primary btn-sm float-right\">Modify</a>";
+	$output .= "<a href=\"index.php?n=ticket_edit&job=" . $this->uid . "\" class=\"btn btn-outline-primary btn-sm float-right\">Modify</a>";
 	$output .= "</div>";
 
 	return $output;
@@ -311,7 +309,7 @@ public function create_zendesk_ticket() {
 		$logRecord->description = "Successfully ran " . strtolower($this->frequency) . " task  '" . $this->subject . "' (" . $this->uid . ")";
 		$logRecord->type = "cron";
 		$logRecord->log_record();
-		
+
 		// Show result
 		//echo "running complete";
 		//echo "<pre>";

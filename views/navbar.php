@@ -11,9 +11,9 @@ $currentPage = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item <?php if($currentPage == "index") { echo "active";}?>"><a class="nav-link" href="index.php">Home</a></li>
-			<li class="nav-item <?php if($currentPage == "jobs" || $currentPage == "job_edit") { echo "active";}?>"><a class="nav-link" href="jobs.php">Tickets</a></li>
-			<li class="nav-item <?php if($currentPage == "agents" || $currentPage == "agent_edit") { echo "active";}?>"><a class="nav-link" href="agents.php">Agents</a></li>
-			<li class="nav-item <?php if($currentPage == "logs") { echo "active";}?>"><a class="nav-link" href="logs.php">Logs</a></li>
+			<li class="nav-item <?php if($currentPage == "jobs" || $currentPage == "job_edit") { echo "active";}?>"><a class="nav-link" href="index.php?n=tickets">Tickets</a></li>
+			<li class="nav-item <?php if($currentPage == "agents" || $currentPage == "agent_edit") { echo "active";}?>"><a class="nav-link" href="index.php?n=agents">Agents</a></li>
+			<li class="nav-item <?php if($currentPage == "logs") { echo "active";}?>"><a class="nav-link" href="index.php?n=logs">Logs</a></li>
 		</ul>
 	</div>
 </div>

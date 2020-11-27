@@ -6,8 +6,22 @@ define ("db_password", "YOUR-PASSWORD");
 
 define ("zd_url", "https://your-zd-domain.zendesk.com");
 define ("zd_subdomain", "your-zd-domain");
-define ("zd_username", "your-email@domain.com");
+define ("zd_username", "your-email@some-domain.com");
 define ("zd_token", "API_TOKEN(NOT-PASSWORD!)");
 
 define ("log_retention", 180); // days to keep logs
+
+DEFINE("reset_url", "https://www.some-domain/password"); // where you want to redirect users to reset their LDAP password
+DEFINE("support_email", "help@some-domain.com");
+
+# LDAP OPTIONS
+define("LDAP_ENABLE", true);
+define("LDAP_SERVER", "server");
+define("LDAP_PORT", 389);
+define("LDAP_STARTTLS", true);
+define("LDAP_BIND_DN", "CN=someaccount,DC=some,DC=domain");
+define("LDAP_BASE_DN", "DC=some,DC=domain");
+define("LDAP_BIND_PASSWORD", "password");
+define("LDAP_ALLOWED_DN", 'OU=Users,DC=some,DC=domain');
+define("LDAP_ACCOUNT_SUFFIX", '@some.domain');
 ?>

@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include_once("views/html_head.php"); ?>
-
 <?php
 if (!empty($_POST)) {
 	$jobCreate = new team();
@@ -29,8 +25,6 @@ $teamMembersEnabled = $team->team_all_enabled();
 $teamMembersDisabled = $team->team_all_disabled();
 
 ?>
-<body>
-<?php include_once("views/navbar.php"); ?>
 
 <div class="container">
 	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
@@ -62,16 +56,13 @@ $teamMembersDisabled = $team->team_all_disabled();
 		}
 		?>
 	</div>
-	<?php include_once("views/footer.php"); ?>
-</div> <!-- /container -->
-</body>
-</html>
+
 
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form action="agents.php" method="post">
+    <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 			<div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Add New Agent</h5>
@@ -92,7 +83,7 @@ $teamMembersDisabled = $team->team_all_disabled();
 				</div>
 				<div class="mb-3">
 					<label for="inputZendeskID" class="form-label">Zendesk ID (required)</label>
-					<input type="text" class="form-control" id="inputZendeskID" name="inputZendeskID" aria-describedby="inputZendeskIDHelp">
+					<input type="number" class="form-control" id="inputZendeskID" name="inputZendeskID" aria-describedby="inputZendeskIDHelp">
 					<div id="inputZendeskIDHelp" class="form-text">This is the ID in the Zendesk URL of the agent</div>
 				</div>
 				<div class="mb-3">

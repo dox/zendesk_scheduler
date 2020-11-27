@@ -103,13 +103,7 @@ public static function team_all_disabled() {
 
 public function member_display() {
 	global $assignUsers;
-
-	$output  = "<div class=\"alert alert-info\">";
-	$output .= " <span class=\"badge badge-secondary\">" . $this->jobs_count() . "</span>";
-	$output .= " <i>(" . $this->email . ")</i>";
-	$output .= "<a href=\"agent_edit.php?member=" . $this->uid . "\" class=\"btn btn-outline-primary btn-sm float-right\">Modify</a>";
-	$output .= "</div>";
-
+	
 	$output  = "<div class=\"col-sm-3\">";
 	$output .= "<div class=\"card\">";
 	//$output .= "<img src=\"...\" class=\"card-img-top\" alt=\"...\">";
@@ -119,7 +113,7 @@ public function member_display() {
 	$output .= "<ul class=\"list-group list-group-flush\">";
 	$output .= "<li class=\"list-group-item\">Jobs: " . $this->jobs_count() . "</li>";
 	$output .= "</ul>";
-	$output .= "<a href=\"agent_edit.php?member=" . $this->uid . "\" class=\"btn btn-primary\">Modify</a>";
+	$output .= "<a href=\"index.php?n=agent_edit&member=" . $this->uid . "\" class=\"btn btn-primary\">Modify</a>";
 	$output .= "</div>";
 	$output .= "</div>";
 	$output .= "</div>";

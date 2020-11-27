@@ -1,8 +1,3 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<?php include_once("views/html_head.php"); ?>
-
 <?php
 if (!empty($_POST)) {
 	$jobCreate = new jobs();
@@ -36,9 +31,9 @@ if (isset($_GET['jobRun'])) {
 
 
 	if ($jobRun->create_zendesk_ticket()) {
-		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Succesfully submitted ticket to Zendesk via API</div>";
+		echo "<div class=\"alert alert-success\" role=\"alert\">Succesfully submitted ticket to Zendesk via API</div>";
 	} else {
-		$messages[] = "<div class=\"alert alert-danger\" role=\"alert\">Something went wrong, please contact IT Support</div>";
+		echo "<div class=\"alert alert-danger\" role=\"alert\">Something went wrong, please contact IT Support</div>";
 	}
 }
 
@@ -107,20 +102,16 @@ $teamMembers = $team->team_all_enabled();
 		echo $job->job_display();
 	}
 	?>
-
-	<?php include_once("views/footer.php"); ?>
-</div> <!-- /container -->
-</body>
-</html>
+</div>
 
 <script>
 function toggleFrequency2() {
 	d = document.getElementById("inputFrequency").value;
 
-	if (d == "Yearly"){
-		$('#inputFrequency2Div').prop('hidden', false);
+	if (d == 'Yearly'){
+		document.getElementById("inputFrequency2Div").removeAttribute("hidden");
 	} else {
-		$('#inputFrequency2Div').prop('hidden', true);
+		document.getElementById("inputFrequency2Div").setAttribute("hidden", true);
 	}
 }
 </script>
@@ -130,7 +121,7 @@ function toggleFrequency2() {
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <form action="jobs.php" method="post">
+    <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 			<div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Add New Scheduled Ticket</h5>

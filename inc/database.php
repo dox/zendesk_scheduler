@@ -1,10 +1,8 @@
 <?php
-include "config.php";
-
 class database {
-	
+
 	private $connection;
-        
+
 	function __construct() {
 		$this->open_connection();
 	}
@@ -19,28 +17,28 @@ class database {
 			}
 		}
 	}
-	
+
 	public function close_connection() {
 		if(isset($this->connection)) {
 			mysqli_close($this->connection);
 			unset($this->connection);
 		}
 	}
-	
+
 	public function query($sql) {
 		$result = mysqli_query($this->connection, $sql);
 		$this->confirm_query($result);
-		
+
 		return $result;
 	}
-	
+
 	private function confirm_query($result) {
 		if (!$result) {
 			die ("Database query failed: " . mysqli_error());
 			//echo ("Database query failed: " . mysql_error());
 		}
 	}
-	
+
 	public function escape_value($value) {
 		$magic_quotes_active = get_magic_quotes_gpc();
 		$new_enough_php = function_exists("mysql_real_escape_string"); // i.e PHP >= 4.3.0
@@ -59,21 +57,21 @@ class database {
 			}
 	return $value;
 	}
-	
+
 	// "database-neutral" methods
-	
+
 	public function fetch_array ($result_set) {
 		return mysqli_fetch_array($result_set);
 	}
-	
+
 	public function num_rows ($result_set) {
 		return mysqli_num_rows($result_set);
 	}
-	
+
 	public function insert_id () {
 		return mysqli_insert_id($this->connection);
 	}
-	
+
 	public function affected_rows () {
 		return mysqli_affected_rows($this->connection);
 	}

@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include_once("views/html_head.php"); ?>
-
 <?php
 $team = new team();
 $teamMember = $team->member($_GET['member']);
@@ -15,20 +11,20 @@ if (!empty($_POST)) {
 	$teamMember->email = $_POST['inputEmail'];
 	$teamMember->zendesk_id = $_POST['inputZendeskID'];
 	$teamMember->enabled = $_POST['inputEnabled'];
-	
+
 	if ($teamMember->member_update()) {
 		$logRecord = new logs();
 		$logRecord->description = "User details for " . $teamMember->firstname . " " . $teamMember->lastname . " modified";
 		$logRecord->type = "admin";
 		$logRecord->log_record();
-		
+
 		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Member Updated!</div>";
 	} else {
 		$logRecord = new logs();
 		$logRecord->description = "Error trying to modify details for " . $teamMember->firstname . " " . $teamMember->lastname . " (User id: " . $teamMember->zendesk_id . ")";
 		$logRecord->type = "error";
 		$logRecord->log_record();
-		
+
 		$messages[] = "<div class=\"alert alert-danger\" role=\"alert\">Something went wrong, please contact IT Support</div>";
 	}
 }
@@ -36,11 +32,11 @@ if (!empty($_POST)) {
 ?>
 <body>
 <?php include_once("views/navbar.php"); ?>
-<div class="container">	
+<div class="container">
 	<div class="row">
 		<div class="col-lg-6">
 			<h4>Modify Team Member <i>(<?php echo $teamMember->firstname . " " . $teamMember->lastname; ?>)</i></h4>
-			<form action="agent_edit.php?member=<?php echo $teamMember->uid; ?>" method="post">
+			<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 			<div class="form-group">
 				<label for="inputFirstname">First Name</label>
 				<input type="text" class="form-control" name="inputFirstname" placeholder="First Name" value="<?php echo $teamMember->firstname; ?>">
@@ -73,7 +69,7 @@ if (!empty($_POST)) {
 				echo "<p>* User cannot be deleted when there are jobs assigned to/logged by them</p>";
 			}
 			?>
-			
+
 			</form>
 		</div>
 		<div class="col-lg-6">
@@ -85,12 +81,6 @@ if (!empty($_POST)) {
 			?>
 		</div>
 	</div>
-	
-	<?php include_once("views/footer.php"); ?>
-	
-	</div> <!-- /container -->
-</body>
-</html>
 
 <script>
 
