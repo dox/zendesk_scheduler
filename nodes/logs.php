@@ -13,7 +13,7 @@ $logsAll = $logs->find_all();
 <div class="container">
 	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
 		<h1 class="display-4">Logs</h1>
-		<p class="lead">Logs for cron tasks, ticket reation and agent changes.</p>
+		<p class="lead">Logs for cron tasks, ticket creation and agent changes.</p>
 	</div>
 
 	<p>Example <b>crontab -e</b>:</p>

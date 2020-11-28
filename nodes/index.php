@@ -11,23 +11,52 @@
 	</div>
 </section>
 
-<div class="row" role="main">
-  <div class="col-lg-6">
-    <h1>Step 1:</h1>
-    <p>Make sure you have installed the excellent <a href="https://github.com/zendesk/zendesk_api_client_php">Zendesk API Client</a> into the same directory as the above files using composer</p>
-
-    <h1>Step 2</h1>
-    <p>Ensure you have configured cron to run the necessary files (see the README)</p>
-
-    <h1>Step 3</h1>
-    <p>Setup your Zendesk <a href="agents.php">agents</a>.</p>
-  </div>
-
-  <div class="col-lg-6">
-    <h1>Step 4</h1>
-    <p>Setup your Zendesk <a href="jobs.php">tasks</a>.</p>
-
-    <h1>Step 6</h1>
-    <p>Sit back and wait for the jobs to come in!</p>
+<div class="container">
+	<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+      <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 fw-normal">Step 1</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">Configure</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Follow the install from the README</li>
+          <li>Setup the cron tasks on your server</li>
+        </ul>
+				<a href="https://www.github.com/dox/zendesk_scheduler" role="button" class="btn btn-lg btn-block btn-outline-primary">README</a>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 fw-normal">Step 2</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">Agents</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Locate each Agent's ID from Zendesk</li>
+          <li>Setup the detais here</li>
+        </ul>
+				<a href="index.php?n=agents" role="button" class="btn btn-lg btn-block btn-outline-primary">Agents</a>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+      <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h4 class="my-0 fw-normal">Step 3</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">Tickets</h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Create scheduled tickets</li>
+          <li>Test tickets by running 'now'</li>
+        </ul>
+				<a href="index.php?n=tickets" role="button" class="btn btn-lg btn-block btn-outline-primary">Agents</a>
+      </div>
+    </div>
+    </div>
   </div>
 </div>

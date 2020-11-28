@@ -18,7 +18,7 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
-  
+
   <!-- Favicons -->
 	<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
@@ -30,9 +30,8 @@
 
 	<style>
 	body {
-	  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-	  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .9);
-	  background: url('/img/cover.jpg') no-repeat center center fixed;
+
+	  background: url('/views/cover.jpg') no-repeat center center fixed;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
 	  -o-background-size: cover;
@@ -71,7 +70,7 @@
 	</style>
 </head>
 
-<body class="d-flex h-100 text-center text-white bg-dark">
+<body class="d-flex h-100 text-center bg-dark">
 	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
 		</header>
@@ -86,10 +85,11 @@
 			?>
 	    <form method="post" id="loginSubmit" action="index.php">
 	      <div class="mb-4 text-center">
-					<svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-bookmark-star-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.16 4.1a.178.178 0 0 0-.32 0l-.634 1.285a.178.178 0 0 1-.134.098l-1.42.206a.178.178 0 0 0-.098.303L6.58 6.993c.042.041.061.1.051.158L6.39 8.565a.178.178 0 0 0 .258.187l1.27-.668a.178.178 0 0 1 .165 0l1.27.668a.178.178 0 0 0 .257-.187L9.368 7.15a.178.178 0 0 1 .05-.158l1.028-1.001a.178.178 0 0 0-.098-.303l-1.42-.206a.178.178 0 0 1-.134-.098L8.16 4.1z"/>
+					<svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-calendar2-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+						<path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+						<path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
 					</svg>
-
 	        <h1 class="h3 mb-3 font-weight-normal">Zendesk Scheduler</h1>
 	      </div>
 	      <label for="inputUsername" class="visually-hidden">Username</label>
@@ -97,11 +97,11 @@
 	      <label for="inputPassword" class="visually-hidden">Password</label>
 	      <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
 	      <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-	      <p class="mt-5 mb-3  text-center"><a class="text-white" href="<?php echo reset_url; ?>">Forgot your password?</a></p>
+	      <p class="mt-5 mb-3  text-center"><a href="<?php echo reset_url; ?>">Forgot your password?</a></p>
 	    </form>
 	  </main>
-		<footer class="mt-auto text-white-50">
-			<p><a href="https://github.com/dox/zendesk_scheduler" class="text-white">Zendesk Scheduler</a> developed by <a href="https://github.com/dox" class="text-white">Andrew Breakspear</a>.</p>
+		<footer class="mt-auto">
+			<p><a href="https://github.com/dox/zendesk_scheduler">Zendesk Scheduler</a> developed by <a href="https://github.com/dox">Andrew Breakspear</a></p>
 		</footer>
     <?php
 			$_SESSION['logon_error'] = null;

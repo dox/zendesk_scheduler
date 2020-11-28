@@ -56,22 +56,24 @@ if (!empty($_POST)) {
 		<label for="inputBody" class="form-label">Ticket Body</label>
 		<textarea class="form-control" rows="3" id="inputBody" name="inputBody"><?php echo $job->body; ?></textarea>
 	</div>
-	<div class="mb-3">
-		<label for="inputType" class="form-label">Ticket Type</label>
-		<select class="form-select" id="inputType" name="inputType">
-			<option value="Question" <?php if ($job->type == "Question") { echo " selected";}?>>Question</option>
-			<option value="Problem" <?php if ($job->type == "Problem") { echo " selected";}?>>Problem</option>
-			<option value="Task"<?php if ($job->type == "Task") { echo " selected";}?> >Task</option>
-		</select>
-	</div>
-	<div class="mb-3">
-		<label for="inputPriority" class="form-label">Ticket Priority</label>
-		<select class="form-select" id="inputPriority" name="inputPriority">
-			<option value="Low" <?php if ($job->priority == "Low") { echo " selected";}?>>Low</option>
-			<option value="Normal" <?php if ($job->priority == "Normal") { echo " selected";}?>>Normal</option>
-			<option value="High" <?php if ($job->priority == "High") { echo " selected";}?>>High</option>
-			<option value="Urgent" <?php if ($job->priority == "Urgent") { echo " selected";}?>>Urgent</option>
-		</select>
+	<div class="row g-12">
+		<div class="col-md-6">
+			<label for="inputType" class="form-label">Ticket Type</label>
+			<select class="form-select" id="inputType" name="inputType">
+				<option value="Question" <?php if ($job->type == "Question") { echo " selected";}?>>Question</option>
+				<option value="Problem" <?php if ($job->type == "Problem") { echo " selected";}?>>Problem</option>
+				<option value="Task"<?php if ($job->type == "Task") { echo " selected";}?> >Task</option>
+			</select>
+		</div>
+		<div class="col-md-6">
+			<label for="inputPriority" class="form-label">Ticket Priority</label>
+			<select class="form-select" id="inputPriority" name="inputPriority">
+				<option value="Low" <?php if ($job->priority == "Low") { echo " selected";}?>>Low</option>
+				<option value="Normal" <?php if ($job->priority == "Normal") { echo " selected";}?>>Normal</option>
+				<option value="High" <?php if ($job->priority == "High") { echo " selected";}?>>High</option>
+				<option value="Urgent" <?php if ($job->priority == "Urgent") { echo " selected";}?>>Urgent</option>
+			</select>
+		</div>
 	</div>
 	<div class="mb-3">
 		<label for="inputLoggedBy" class="form-label">Ticket Logged By</label>
@@ -136,7 +138,9 @@ if (!empty($_POST)) {
 			<option value="Disabled" <?php if ($job->status == "Disabled") { echo " selected";}?>>Disabled</option>
 		</select>
 	</div>
-	<button type="submit" class="btn btn-primary">Modify</button>
+	<div class="d-grid gap-2">
+		<button type="submit" class="btn btn-primary">Save</button>
+	</div>
 	</form>
 </div>
 

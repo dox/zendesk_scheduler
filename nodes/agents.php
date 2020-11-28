@@ -29,7 +29,7 @@ $teamMembersDisabled = $team->team_all_disabled();
 <div class="container">
 	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
 		<h1 class="display-4">Agents</h1>
-		<p class="lead">Agents from your Zendesk that you want to assign scheduled tickets.</p>
+		<p class="lead">Agents from Zendesk that you can assign scheduled tickets too.</p>
 	</div>
 
 	<div class="pb-3 text-right">

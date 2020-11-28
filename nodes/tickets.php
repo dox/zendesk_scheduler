@@ -53,7 +53,7 @@ $teamMembers = $team->team_all_enabled();
 <div class="container">
 	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
 		<h1 class="display-4">Tickets</h1>
-		<p class="lead">Daily, weekly, monthly and yearly tickets to auto-schedule onto your Zendesk.</p>
+		<p class="lead">Daily, weekly, monthly and yearly tickets that are auto-scheduled to appeart on Zendesk.</p>
 	</div>
 
 	<div class="pb-3 text-right">
