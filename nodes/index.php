@@ -54,7 +54,7 @@
           <li>Create scheduled tickets</li>
           <li>Test tickets by running 'now'</li>
         </ul>
-				<a href="index.php?n=tickets" role="button" class="btn btn-lg btn-block btn-outline-primary">Agents</a>
+				<a href="index.php?n=tickets" role="button" class="btn btn-lg btn-block btn-outline-primary">Tickets</a>
       </div>
     </div>
     </div>
