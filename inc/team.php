@@ -103,18 +103,24 @@ public static function team_all_disabled() {
 
 public function member_display() {
 	global $assignUsers;
-	
-	$output  = "<div class=\"col-sm-3\">";
+
+	$totalJobsBadge .= "<span class=\"badge rounded-pill bg-primary float-right\">" . $this->jobs_count() . autoPluralise(' job', ' jobs', $this->jobs_count()) . "</span>";
+
+	$output  = "<div class=\"col\">";
 	$output .= "<div class=\"card\">";
+
+	$output .= "<div class=\"card-header\">" . $this->firstname . " " . $this->lastname . $totalJobsBadge . "</div>";
 	//$output .= "<img src=\"...\" class=\"card-img-top\" alt=\"...\">";
 	$output .= "<div class=\"card-body\">";
-	$output .= "<h5 class=\"card-title\">" . $this->firstname . " " . $this->lastname . "</h5>";
-	$output .= "<p class=\"card-text\">" . $this->email . "</p>";
+	$output .= "<p class=\"card-text text-nowrap\">" . $this->email . "</p>";
 	$output .= "<ul class=\"list-group list-group-flush\">";
-	$output .= "<li class=\"list-group-item\">Jobs: " . $this->jobs_count() . "</li>";
+	//$output .= "<li class=\"list-group-item\">Jobs: " . $this->jobs_count() . "</li>";
 	$output .= "</ul>";
-	$output .= "<a href=\"index.php?n=agent_edit&member=" . $this->uid . "\" class=\"btn btn-primary\">Modify</a>";
 	$output .= "</div>";
+
+	$button = "<a href=\"index.php?n=agent_edit&member=" . $this->uid . "\" class=\"btn btn-sm btn-outline-primary float-right\">Modify</a>";
+	$output .= "<div class=\"card-footer\">" . $totalJobsText . $button . "</div>";
+
 	$output .= "</div>";
 	$output .= "</div>";
 

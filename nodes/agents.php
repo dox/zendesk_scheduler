@@ -40,7 +40,7 @@ $teamMembersDisabled = $team->team_all_disabled();
 		</a>
 	</div>
 
-	<div class="row">
+	<div class="row row-cols-1 row-cols-md-3 g-4">
 		<?php
 		foreach($teamMembersEnabled AS $member) {
 			echo $member->member_display();
@@ -49,13 +49,14 @@ $teamMembersDisabled = $team->team_all_disabled();
 	</div>
 
 	<h4>Previous Team Members</h4>
-	<div class="row">
+	<div class="row row-cols-1 row-cols-md-3 g-4">
 		<?php
 		foreach($teamMembersDisabled AS $member) {
 			echo $member->member_display();
 		}
 		?>
 	</div>
+</div>
 
 
 
