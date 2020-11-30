@@ -17,10 +17,17 @@ $logsAll = $logs->find_all();
 	</div>
 
 	<p>Example <b>crontab -e</b>:</p>
-	<code>0 0 * * MON-FRI php -f /var/www/html/zendesk/cron/daily.php</code><br />
-	<code>0 0 * * MON php -f /var/www/html/zendesk/cron/weekly.php</code><br />
-	<code>0 0 1 * * php -f /var/www/html/zendesk/cron/monthly.php</code><br />
-
+	<?php
+	$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+	?>
+	<code># Run Zendesk daily tasks every week day morning:</code><br />
+	<code>0 0 * * MON-FRI curl <?php echo $actual_link;?>/cron/daily.php</code><br /><br />
+	<code># Run Zendesk weekly tasks every Monday morning:</code><br />
+	<code>0 0 * * MON curl <?php echo $actual_link;?>/cron/weekly.php</code><br /><br />
+	<code># Run Zendesk monthly tasks every 1st of the month:</code><br />
+	<code>0 0 1 * * curl <?php echo $actual_link;?>/cron/monthly.php</code><br /><br />
+	<code># Run Zendesk yearly tasks (check every morning):</code><br />
+	<code>0 0 * * * curl <?php echo $actual_link;?>/cron/yearly.php</code><br /><br />
 	<hr />
 
 	<table class="table table-striped">
