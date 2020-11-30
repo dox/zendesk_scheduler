@@ -1,17 +1,13 @@
-<section class="py-5 text-center container">
-	<div class="row py-lg-5">
-		<div class="col-lg-6 col-md-8 mx-auto">
-			<h1 class="font-weight-light">Zendesk Scheduler</h1>
-			<p class="lead text-muted">A simple web-based utility to create and manage reoccurring Zendesk ticket creation</p>
-			<p>
-				<a href="<?php echo zd_url; ?>" class="btn btn-primary my-2">View Zendesk</a>
-				<!--<a href="#" class="btn btn-secondary my-2">Secondary action</a>-->
-			</p>
-		</div>
-	</div>
-</section>
-
 <div class="container">
+	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
+		<h1 class="display-4">Zendesk Schedule</h1>
+		<p class="lead">A simple web-based utility to create and manage reoccurring Zendesk ticket creation.</p>
+	</div>
+
+	<div class="pb-3 text-right">
+		<a class="btn btn-primary" href="<?php echo zd_url; ?>" role="button">View Zendesk</a>
+	</div>
+
 	<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     <div class="col">
       <div class="card mb-4 shadow-sm">
