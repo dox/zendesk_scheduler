@@ -15,10 +15,10 @@ A simple web-based utility to create and manage reoccurring zendesk ticket creat
 * Modify yoru crontab ```sudo crontab -e``` and include the following (modify for your own folder structure!)
 
 ```
-0 0 * * MON-FRI php -f /var/www/html/zendesk/cron/daily.php
-0 0 * * MON php -f /var/www/html/zendesk/cron/weekly.php
-0 0 1 * * php -f /var/www/html/zendesk/cron/monthly.php
-0 0 * * * php -f /var/www/html/zendesk/cron/yearly.php
+0 0 * * MON-FRI curl http://yourdomain/cron/daily.php
+0 0 * * MON curl http://yourdomain/cron/weekly.php
+0 0 1 * * curl http://yourdomain/cron/monthly.php
+0 0 * * * curl http://yourdomain/cron/yearly.php
 ```
 
 * Go to your web server via HTTP and add your Zendesk agents (you'll need each Agent's ID, as it exists in your Zendesk)
