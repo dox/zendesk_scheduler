@@ -159,17 +159,26 @@ public function job_display() {
 	$teamMember = $team->member($this->assign_to);
 
 	if ($this->status == "Enabled") {
-		$class = "alert-info";
+		$class = "";
+		$subjectTitle = $this->subject;
 	} else {
-		$class = "alert-secondary";
+		$class = "list-group-item-dark";
+		$subjectTitle = $this->subject . " [DISABLED]";
 	}
 
-	$output  = "<div class=\"alert " . $class . " clearfix\">";
-	$output .= "<strong>" . $this->type . ":</strong> ";
-	$output .= $this->subject;
-	$output .= " <em>(" . $teamMember->firstname . " " . $teamMember->lastname . ")</em>";
-	$output .= "<a href=\"index.php?n=ticket_edit&job=" . $this->uid . "\" class=\"btn btn-outline-primary btn-sm float-right\">Modify</a>";
+
+	$output  = "<a href=\"index.php?n=ticket_edit&job=" . $this->uid . "\" class=\"list-group-item list-group-item-action " . $class . "\">";
+	$output .= "<div class=\"d-flex w-100 justify-content-between\">";
+	$output .= "<h5 class=\"mb-1\">" . $subjectTitle . "</h5>";
+	$output .= "<span class=\"badge bg-primary rounded-pill\">" . $this->type . "</span>";
 	$output .= "</div>";
+	$output .= "<p class=\"mb-1\">" . $this->body . "</p>";
+	$output .= "<small>Assign To: " . $teamMember->firstname . " " . $teamMember->lastname . "</small>";
+
+	if ($this->frequency == "Yearly") {
+		$output .= " on <small>" . strtoupper($this->frequency2) . "</small>";
+	}
+	$output .= "</a>";
 
 	return $output;
 }

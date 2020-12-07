@@ -98,7 +98,6 @@ $teamMembers = $team->team_all_enabled();
 	<p>These tasks will appear on Zendesk at 00:00 once every year on the date(s) specified.</p>
 	<?php
 	foreach($jobs_yearly AS $job) {
-		echo "<small class=\"form-text text-muted\">" . strtoupper($job->frequency2) . "</small>";
 		echo $job->job_display();
 	}
 	?>
