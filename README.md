@@ -9,8 +9,9 @@ A simple web-based utility to create and manage reoccurring zendesk ticket creat
 * Then install (via composer) the [Zendesk API Client](https://github.com/zendesk/zendesk_api_client_php) and [ldaprecord](https://ldaprecord.com)
     * ```composer require zendesk/zendesk_api_client_php```
     * ```composer require directorytree/ldaprecord```
-* Create a database in mysql and in it run the 'mysql_import.sql' file.  This will create the structure for the database
-* Modify the inc/config.php file with your settings
+* Create a database in mysql and include the host, database, username and password in config.php
+* Modify the inc/config.php file with your LDAP/other settings
+* Visit http://yourdomeain/install.php and click 'CLICK HERE TO SETUP TABLES IN YOUR DATABASE'.  This will create the structure for the database
 * Check your site it up and running (it should be!)
 * Modify youu crontab ```sudo crontab -e``` and include the following (modify for your own folder structure!)
 
