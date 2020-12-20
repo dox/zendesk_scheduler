@@ -24,3 +24,6 @@ A simple web-based utility to create and manage reoccurring zendesk ticket creat
 
 * Go to your web server via HTTP and add your Zendesk agents (you'll need each Agent's ID, as it exists in your Zendesk)
 * Add jobs
+
+## Upgrading
+Upgrading is as simple as running ```git pull``` in the directory you created above.
