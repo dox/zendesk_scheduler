@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include_once("views/html_head.php");
-
+<?php
 $logs = new logs();
 $logs->delete_old_logs();
 $logsAll = $logs->find_all();
 ?>
-
-<body>
-<?php include_once("views/navbar.php"); ?>
 
 <div class="container">
 	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
@@ -46,8 +40,4 @@ $logsAll = $logs->find_all();
 			?>
 		</tbody>
 	</table>
-
-	<?php include_once("views/footer.php"); ?>
-</div> <!-- /container -->
-</body>
-</html>
+</div>

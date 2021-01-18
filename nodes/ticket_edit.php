@@ -57,7 +57,7 @@ if (!empty($_POST)) {
 		<textarea class="form-control" rows="3" id="inputBody" name="inputBody"><?php echo $job->body; ?></textarea>
 	</div>
 	<div class="row g-12">
-		<div class="col-md-6">
+		<div class="col-md-6 mb-3">
 			<label for="inputType" class="form-label">Ticket Type</label>
 			<select class="form-select" id="inputType" name="inputType">
 				<option value="Question" <?php if ($job->type == "Question") { echo " selected";}?>>Question</option>
@@ -65,7 +65,7 @@ if (!empty($_POST)) {
 				<option value="Task"<?php if ($job->type == "Task") { echo " selected";}?> >Task</option>
 			</select>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6 mb-3">
 			<label for="inputPriority" class="form-label">Ticket Priority</label>
 			<select class="form-select" id="inputPriority" name="inputPriority">
 				<option value="Low" <?php if ($job->priority == "Low") { echo " selected";}?>>Low</option>
