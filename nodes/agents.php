@@ -28,15 +28,13 @@ $teamMembersDisabled = $team->team_all_disabled();
 
 <div class="container">
 	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
-		<h1 class="display-4">Agents</h1>
+		<h1 class="display-4"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#agents"/></svg> Agents</h1>
 		<p class="lead">Agents from Zendesk that you can assign scheduled tickets too.</p>
 	</div>
 
 	<div class="pb-3 text-right">
 		<a class="btn btn-primary" href="index.php?n=admin_meal" role="button" data-toggle="modal" data-target="#staticBackdrop">
-			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-			</svg> Add new
+			<svg width="1em" height="1em"><use xlink:href="inc/icons.svg#agents"/></svg> Add new
 		</a>
 	</div>
 

@@ -6,7 +6,7 @@ $logsAll = $logs->find_all();
 
 <div class="container">
 	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
-		<h1 class="display-4">Logs</h1>
+		<h1 class="display-4"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#logs"/></svg> Logs</h1>
 		<p class="lead">Logs for cron tasks, ticket creation and agent changes.</p>
 	</div>
 
