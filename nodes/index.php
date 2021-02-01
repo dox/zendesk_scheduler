@@ -5,7 +5,7 @@
 	</div>
 
 	<div class="pb-3 text-right">
-		<a class="btn btn-primary" href="<?php echo zd_url; ?>" role="button">View Zendesk</a>
+		<a class="btn btn-primary" href="<?php echo zd_url; ?>" role="button"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#zendesk"/></svg> View Zendesk</a>
 	</div>
 
 	<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">

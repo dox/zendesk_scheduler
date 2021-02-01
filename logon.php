@@ -87,7 +87,7 @@
 	    <form method="post" id="loginSubmit" action="index.php">
 	      <div class="mb-4 text-center">
 					<svg width="3em" height="3em">
-						<use xlink:href="inc/icons.svg#calendar2-check"/>
+						<use xlink:href="inc/icons.svg#logo"/>
 					</svg> <h1 class="h3 mb-3 font-weight-normal">Zendesk Scheduler</h1>
 	      </div>
 	      <label for="inputUsername" class="visually-hidden">Username</label>
