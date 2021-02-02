@@ -47,8 +47,6 @@ $team = new team();
 $teamMembers = $team->team_all_enabled();
 
 ?>
-<body>
-<?php include_once("views/navbar.php"); ?>
 
 <div class="container">
 	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
