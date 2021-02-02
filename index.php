@@ -51,7 +51,7 @@ if ($_SESSION['logon'] != true) {
 
 <!--<body>-->
 <body class="bg-light">
-	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+	<div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
 		<?php
 		include_once("views/navbar.php");
 		?>
