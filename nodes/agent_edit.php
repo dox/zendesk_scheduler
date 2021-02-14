@@ -37,7 +37,7 @@ if (!empty($_POST)) {
 		<p class="lead"><?php echo $job->subject; ?></p>
 	</div>
 
-	<div class="pb-3 text-right">
+	<div class="pb-3 text-end">
 		<?php
 		if (count($jobsAssigned) == 0) {
 			$disabled = "";

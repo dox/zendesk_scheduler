@@ -54,8 +54,8 @@ $teamMembers = $team->team_all_enabled();
 		<p class="lead">Daily, weekly, monthly and yearly tickets that are auto-scheduled to appear on Zendesk.</p>
 	</div>
 
-	<div class="pb-3 text-right">
-		<a class="btn btn-primary" href="index.php?n=admin_meal" role="button" data-toggle="modal" data-target="#staticBackdrop">
+	<div class="pb-3 text-end">
+		<a class="btn btn-primary" href="index.php?n=admin_meal" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 			<svg width="1em" height="1em"><use xlink:href="inc/icons.svg#tickets"/></svg> Add new
 		</a>
 	</div>

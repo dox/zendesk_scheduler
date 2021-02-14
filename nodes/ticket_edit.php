@@ -32,7 +32,7 @@ if (!empty($_POST)) {
 		<p class="lead"><?php echo $job->subject; ?></p>
 	</div>
 
-	<div class="pb-3 text-right">
+	<div class="pb-3 text-end">
 		<a class="btn btn-warning" id="runJob" href="#" role="button" onclick="runJob();">
 			<svg width="1em" height="1em"><use xlink:href="inc/icons.svg#run-now"></svg> Run Now
 		</a>

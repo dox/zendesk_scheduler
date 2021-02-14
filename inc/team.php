@@ -104,7 +104,7 @@ public static function team_all_disabled() {
 public function member_display() {
 	global $assignUsers;
 
-	$totalJobsBadge .= "<span class=\"badge rounded-pill bg-primary float-right\">" . $this->jobs_count() . autoPluralise(' job', ' jobs', $this->jobs_count()) . "</span>";
+	$totalJobsBadge .= "<span class=\"badge rounded-pill bg-primary float-end\">" . $this->jobs_count() . autoPluralise(' job', ' jobs', $this->jobs_count()) . "</span>";
 
 	$output  = "<div class=\"col\">";
 	$output .= "<div class=\"card\">";

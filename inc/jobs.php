@@ -166,13 +166,12 @@ public function job_display() {
 		$subjectTitle = $this->subject . " [DISABLED]";
 	}
 
-
 	$output  = "<a href=\"index.php?n=ticket_edit&job=" . $this->uid . "\" class=\"list-group-item list-group-item-action " . $class . "\">";
 	$output .= "<div class=\"d-flex w-100 justify-content-between\">";
 	$output .= "<h5 class=\"mb-1\">" . $subjectTitle . "</h5>";
 	$output .= "</div>";
 	$output .= "<p class=\"mb-1\">" . $this->body . "</p>";
-	$output .= "<span class=\"badge bg-primary rounded-pill float-right\">" . $this->type . "</span>" . "<small>Assign To: " . $teamMember->firstname . " " . $teamMember->lastname . "</small>";
+	$output .= "<span class=\"badge bg-primary rounded-pill float-end\">" . $this->type . "</span>" . "<small>Assign To: " . $teamMember->firstname . " " . $teamMember->lastname . "</small>";
 
 	if ($this->frequency == "Yearly") {
 		$output .= " on <small>" . strtoupper($this->frequency2) . "</small>";

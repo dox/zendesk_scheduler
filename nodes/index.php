@@ -4,7 +4,7 @@
 		<p class="lead">A simple web-based utility to create and manage reoccurring Zendesk ticket creation.</p>
 	</div>
 
-	<div class="pb-3 text-right">
+	<div class="pb-3 text-end">
 		<a class="btn btn-primary" href="<?php echo zd_url; ?>" role="button"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#zendesk"/></svg> View Zendesk</a>
 	</div>
 
