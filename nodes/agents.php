@@ -38,13 +38,15 @@ $teamMembersDisabled = $team->team_all_disabled();
 		</a>
 	</div>
 
-	<div class="row row-cols-1 row-cols-md-3 g-4">
+	<div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
 		<?php
 		foreach($teamMembersEnabled AS $member) {
 			echo $member->member_display();
 		}
 		?>
 	</div>
+
+	<hr />
 
 	<h4>Previous Team Members</h4>
 	<div class="row row-cols-1 row-cols-md-3 g-4">

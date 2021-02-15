@@ -7,7 +7,7 @@ $currentPage = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 		<svg width="1em" height="1em">
 			<use xlink:href="inc/icons.svg#logo"/>
 		</svg> Zendesk Scheduler</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 

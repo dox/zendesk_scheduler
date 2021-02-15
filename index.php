@@ -51,24 +51,20 @@ if ($_SESSION['logon'] != true) {
 
 <!--<body>-->
 <body class="bg-light">
-	<div class="d-flex w-100 h-100 p-3 mx-auto flex-column">
-		<?php
-		include_once("views/navbar.php");
-		?>
-		<?php
+	<?php include_once("views/navbar.php");
+	
+	$node = "nodes/index.php";
+	if (isset($_GET['n'])) {
+		$node = "nodes/" . $_GET['n'] . ".php";
 
-		$node = "nodes/index.php";
-			if (isset($_GET['n'])) {
-				$node = "nodes/" . $_GET['n'] . ".php";
+		if (!file_exists($node)) {
+			$node = "nodes/404.php";
+		}
+	}
 
-				if (!file_exists($node)) {
-					$node = "nodes/404.php";
-				}
-			}
-		include_once($node);
+	include_once($node);
 
-		include_once("views/footer.php");
-		?>
-	</div>
+	include_once("views/footer.php");
+	?>
 </body>
 </html>

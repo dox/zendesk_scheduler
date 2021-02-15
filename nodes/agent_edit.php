@@ -59,7 +59,7 @@ if (!empty($_POST)) {
 
 <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 <div class="row">
-	<div class="col-lg-6">
+	<div class="col-lg-6 mb-3">
 		<div class="mb-3">
 			<label for="inputFirstname" class="form-label">First Name</label>
 			<input type="text" class="form-control" name="inputFirstname" value="<?php echo $teamMember->firstname; ?>">
@@ -87,6 +87,7 @@ if (!empty($_POST)) {
 			<button type="submit" class="btn btn-primary">Modify</button>
 		</div>
 	</div>
+
 	<div class="col-lg-6">
 		<h4>Jobs assigned to/logged by:</h4>
 		<?php
