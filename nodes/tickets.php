@@ -11,6 +11,7 @@ if (!empty($_POST)) {
 	$jobCreate->assign_to = $_POST['inputAssignTo'];
 	$jobCreate->logged_by = $_POST['inputLoggedBy'];
 	$jobCreate->cc = $_POST['inputCC'];
+	$jobCreate->status = 'Enaled';
 	$jobCreate->job_create();
 }
 
