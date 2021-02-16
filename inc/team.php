@@ -1,4 +1,6 @@
 <?php
+use Zendesk\API\HttpClient as ZendeskAPI;
+
 class team {
 
 protected static $table_name = "team";
@@ -187,6 +189,35 @@ public function member_update() {
 		return true;
 	} else {
 		return false;
+	}
+}
+
+public function getAgents() {
+	$subdomain = zd_subdomain;
+	$username  = zd_username;
+	$token     = zd_token;
+
+	$client = new ZendeskAPI($subdomain);
+	$client->setAuth('basic', ['username' => $username, 'token' => $token]);
+
+	$params = array('query' => 'role:Agent role:Administrator');
+
+	try {
+    $users = $client->users()->search($params);
+
+		$logRecord = new logs();
+		$logRecord->description = "Successfully searched Zendesk for agents";
+		$logRecord->type = "cron";
+		$logRecord->log_record();
+
+		return $users->users;
+	} catch (\Zendesk\API\Exceptions\ApiResponseException $e) {
+		$logRecord = new logs();
+		$logRecord->description = "Error searching Zendesk for agents";
+		$logRecord->type = "error";
+		$logRecord->log_record();
+
+		return $e->getMessage().'</br>';
 	}
 }
 

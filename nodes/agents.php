@@ -1,4 +1,6 @@
 <?php
+$team = new team();
+
 if (!empty($_POST)) {
 	$jobCreate = new team();
 	$jobCreate->firstname = $_POST['inputFirstname'];
@@ -7,6 +9,28 @@ if (!empty($_POST)) {
 	$jobCreate->zendesk_id = $_POST['inputZendeskID'];
 	$jobCreate->enabled = $_POST['inputEnabled'];
 	$jobCreate->team_create();
+}
+
+if (isset($_GET['import'])) {
+	foreach ($team->team_all() AS $teamMember) {
+		$teamMembersZDidArray[] = $teamMember->zendesk_id;
+	}
+
+	foreach ($team->getAgents() AS $zdAgent) {
+		if (in_array($zdAgent->id, $teamMembersZDidArray)) {
+			// user already in local database
+		} else {
+			// user doesn't exist locally
+
+			$agentCreate = new team();
+			$agentCreate->firstname = $zdAgent->name;
+			//$agentCreate->lastname = $zdAgent->name;
+			$agentCreate->email = $zdAgent->email;
+			$agentCreate->zendesk_id = $zdAgent->id;
+			$agentCreate->enabled = "1";
+			$agentCreate->team_create();
+		}
+	}
 }
 
 if (isset($_GET['memberDelete'])) {
@@ -20,10 +44,9 @@ if (isset($_GET['memberDelete'])) {
 	}
 }
 
-$team = new team();
+
 $teamMembersEnabled = $team->team_all_enabled();
 $teamMembersDisabled = $team->team_all_disabled();
-
 ?>
 
 <div class="container">
@@ -33,6 +56,9 @@ $teamMembersDisabled = $team->team_all_disabled();
 	</div>
 
 	<div class="pb-3 text-end">
+		<a class="btn btn-warning" href="index.php?n=agents&import=true" role="button">
+			<svg width="1em" height="1em"><use xlink:href="inc/icons.svg#zendesk"/></svg> Import Current Agents
+		</a>
 		<a class="btn btn-primary" href="index.php?n=admin_meal" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 			<svg width="1em" height="1em"><use xlink:href="inc/icons.svg#agents"/></svg> Add new
 		</a>

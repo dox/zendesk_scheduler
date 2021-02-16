@@ -89,4 +89,10 @@ function autoPluralise ($singular, $plural, $count = 1) {
 
 	return ($count == 1)? $singular : $plural;
 } // END function autoPluralise
+
+function printArray($array) {
+	echo ("<pre>");
+	print_r ($array);
+	echo ("</pre>");
+}
 ?>
