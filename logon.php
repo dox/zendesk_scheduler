@@ -95,7 +95,13 @@
 	      <label for="inputPassword" class="visually-hidden">Password</label>
 	      <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Password" required>
 	      <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-	      <p class="mt-5 mb-3  text-center"><a href="<?php echo reset_url; ?>">Forgot your password?</a></p>
+
+				<?php
+				if (defined(reset_url)) {
+					echo "<p class=\"mt-5 mb-3 text-center\"><a href=\"" . reset_url . "\">Forgot your password?</a></p>";
+				}
+				?>
+
 	    </form>
 	  </main>
 		<footer class="mt-auto">
