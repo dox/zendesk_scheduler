@@ -1,5 +1,5 @@
 <?php
-include_once("../inc/autoload.php");
+require('./inc/autoload.php');
 
 $jobs = new jobs();
 $jobs_monthly = $jobs->jobs_monthly();

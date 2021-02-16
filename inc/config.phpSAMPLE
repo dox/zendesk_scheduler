@@ -1,4 +1,6 @@
 <?php
+define ("debug", false);
+
 define ("db_host", "localhost");
 define ("db_database", "YOUR-DATABASE-NAME");
 define ("db_user", "YOUR-MYSQL-USERNAME");
@@ -18,7 +20,7 @@ DEFINE("support_email", "help@some-domain.com");
 define("LDAP_ENABLE", true);
 define("LDAP_SERVER", "server");
 define("LDAP_PORT", 389);
-define("LDAP_STARTTLS", true);
+define("LDAP_STARTTLS", false);
 define("LDAP_BIND_DN", "CN=someaccount,DC=some,DC=domain");
 define("LDAP_BASE_DN", "DC=some,DC=domain");
 define("LDAP_BIND_PASSWORD", "password");

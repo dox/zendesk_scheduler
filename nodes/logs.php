@@ -10,18 +10,23 @@ $logsAll = $logs->find_all();
 		<p class="lead">Logs for cron tasks, ticket creation and agent changes.</p>
 	</div>
 
-	<p>Example <b>crontab -e</b>:</p>
-	<?php
-	$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-	?>
-	<code># Run Zendesk daily tasks every week day morning:</code><br />
-	<code>0 0 * * MON-FRI curl <?php echo $actual_link;?>/cron/daily.php</code><br /><br />
-	<code># Run Zendesk weekly tasks every Monday morning:</code><br />
-	<code>0 0 * * MON curl <?php echo $actual_link;?>/cron/weekly.php</code><br /><br />
-	<code># Run Zendesk monthly tasks every 1st of the month:</code><br />
-	<code>0 0 1 * * curl <?php echo $actual_link;?>/cron/monthly.php</code><br /><br />
-	<code># Run Zendesk yearly tasks (check every morning):</code><br />
-	<code>0 0 * * * curl <?php echo $actual_link;?>/cron/yearly.php</code><br /><br />
+	<div class="mb-3">
+		<p>Example <b>crontab -e</b>:</p>
+
+		<code>
+			<ul class="list-unstyled">
+				<li># Run Zendesk daily tasks every week day morning:</li>
+				<li>0 0 * * MON-FRI cd <?php echo($_SERVER['DOCUMENT_ROOT']); ?>/; php -q cron/daily.php</li>
+				<li># Run Zendesk weekly tasks every Monday morning:</li>
+				<li>0 0 * * MON cd <?php echo($_SERVER['DOCUMENT_ROOT']); ?>/; php -q cron/weekly.php</li>
+				<li># Run Zendesk monthly tasks every 1st of the month:</li>
+				<li>0 0 1 * * cd <?php echo($_SERVER['DOCUMENT_ROOT']); ?>/; php -q cron/monthly.php</li>
+				<li># Run Zendesk yearly tasks (check every morning):</li>
+				<li>0 0 * * * cd <?php echo($_SERVER['DOCUMENT_ROOT']); ?>/; php -q cron/yearly.php</li>
+			</ul>
+		</code>
+	</div>
+
 	<hr />
 
 	<table class="table table-striped">
