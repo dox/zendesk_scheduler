@@ -45,7 +45,7 @@ if (!empty($_POST)) {
 			//echo "<button id=\"deleteJob\" type=\"submit\" class=\"btn btn-danger\">Delete</button>";
 		} else {
 			$disabled = " disabled ";
-			$message = "<p>* User cannot be deleted when there are jobs assigned to/logged by them</op";
+			$message = "<p>* User cannot be deleted when there are jobs assigned to/logged by them</p>";
 			//echo "<button id=\"deleteJob\" disabled type=\"submit\" class=\"btn btn-danger\">Delete</button>";
 			//echo "<p>* User cannot be deleted when there are jobs assigned to/logged by them</p>";
 		}
@@ -55,49 +55,49 @@ if (!empty($_POST)) {
 		</a>
 		<?php echo $message; ?>
 	</div>
-</div>
 
-<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
-<div class="row">
-	<div class="col-lg-6 mb-3">
-		<div class="mb-3">
-			<label for="inputFirstname" class="form-label">First Name</label>
-			<input type="text" class="form-control" name="inputFirstname" value="<?php echo $teamMember->firstname; ?>">
+	<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
+	<div class="row">
+		<div class="col-lg-6 mb-3">
+			<div class="mb-3">
+				<label for="inputFirstname" class="form-label">First Name</label>
+				<input type="text" class="form-control" name="inputFirstname" value="<?php echo $teamMember->firstname; ?>">
+			</div>
+			<div class="mb-3">
+				<label for="inputLastname" class="form-label">Last Name</label>
+				<input type="text" class="form-control" name="inputLastname" value="<?php echo $teamMember->lastname; ?>">
+			</div>
+			<div class="mb-3">
+				<label for="inputEmail" class="form-label">Email Address</label>
+				<input type="email" class="form-control" name="inputEmail" value="<?php echo $teamMember->email; ?>">
+			</div>
+			<div class="mb-3">
+				<label for="inputZendeskID" class="form-label">Zendesk ID</label>
+				<input type="number" class="form-control" name="inputZendeskID" value="<?php echo $teamMember->zendesk_id; ?>">
+			</div>
+			<div class="mb-3">
+				<label for="inputEnabled" class="form-label">User Account Status</label>
+				<select class="form-select" id="inputEnabled" name="inputEnabled" aria-label="Default select example">
+					<option value="1" <?php if ($teamMember->enabled == "1") { echo " selected";}?>>Enabled</option>
+					<option value="0" <?php if ($teamMember->enabled == "0") { echo " selected";}?>>Disabled</option>
+				</select>
+			</div>
+			<div class="d-grid gap-2">
+				<button type="submit" class="btn btn-primary">Modify</button>
+			</div>
 		</div>
-		<div class="mb-3">
-			<label for="inputLastname" class="form-label">Last Name</label>
-			<input type="text" class="form-control" name="inputLastname" value="<?php echo $teamMember->lastname; ?>">
-		</div>
-		<div class="mb-3">
-			<label for="inputEmail" class="form-label">Email Address</label>
-			<input type="email" class="form-control" name="inputEmail" value="<?php echo $teamMember->email; ?>">
-		</div>
-		<div class="mb-3">
-			<label for="inputZendeskID" class="form-label">Zendesk ID</label>
-			<input type="number" class="form-control" name="inputZendeskID" value="<?php echo $teamMember->zendesk_id; ?>">
-		</div>
-		<div class="mb-3">
-			<label for="inputEnabled" class="form-label">User Account Status</label>
-			<select class="form-select" id="inputEnabled" name="inputEnabled" aria-label="Default select example">
-				<option value="1" <?php if ($teamMember->enabled == "1") { echo " selected";}?>>Enabled</option>
-				<option value="0" <?php if ($teamMember->enabled == "0") { echo " selected";}?>>Disabled</option>
-			</select>
-		</div>
-		<div class="d-grid gap-2">
-			<button type="submit" class="btn btn-primary">Modify</button>
+
+		<div class="col-lg-6">
+			<h4>Jobs assigned to/logged by:</h4>
+			<?php
+			foreach($jobsAssigned AS $job) {
+				echo $job->job_display();
+			}
+			?>
 		</div>
 	</div>
-
-	<div class="col-lg-6">
-		<h4>Jobs assigned to/logged by:</h4>
-		<?php
-		foreach($jobsAssigned AS $job) {
-			echo $job->job_display();
-		}
-		?>
-	</div>
+	</form>
 </div>
-</form>
 
 <script>
 function deleteAgent() {
