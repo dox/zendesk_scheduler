@@ -3,7 +3,7 @@ session_start();
 
 $root = $_SERVER['DOCUMENT_ROOT'];
 
-require_once('./inc/config.php');
+require_once($root . '/inc/config.php');
 
 if (debug == true) {
 	ini_set('display_errors', 1);
@@ -15,7 +15,7 @@ if (debug == true) {
 	error_reporting(0);
 }
 
-require './vendor/autoload.php';
+require ($root . '/vendor/autoload.php');
 
 use LdapRecord\Connection;
 
@@ -38,13 +38,8 @@ try {
     echo $error->getDiagnosticMessage();
 }
 
-
-//require_once($root . '/inc/globalFunctions.php');
-require_once('./inc/database.php');
-//require_once($root . '/inc/class_settings.php');
-require_once('./inc/jobs.php');
-require_once('./inc/team.php');
-require_once('./inc/logs.php');
-
-//$db = new db(db_host, db_username, db_password, db_name);
+require_once($root . '/inc/database.php');
+require_once($root . '/inc/jobs.php');
+require_once($root . '/inc/team.php');
+require_once($root . '/inc/logs.php');
 ?>

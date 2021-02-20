@@ -1,5 +1,14 @@
 <?php
-require('./inc/autoload.php');
+session_start();
+
+require_once('./inc/config.php');
+
+require_once('./vendor/autoload.php');
+
+require_once('./inc/database.php');
+require_once('./inc/jobs.php');
+require_once('./inc/team.php');
+require_once('./inc/logs.php');
 
 $jobs = new jobs();
 $jobs_weekly = $jobs->jobs_weekly();

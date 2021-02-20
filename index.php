@@ -1,5 +1,5 @@
 <?php
-include_once("inc/autoload.php");
+include_once("./inc/autoload.php");
 if (isset($_POST['inputUsername']) && isset($_POST['inputPassword'])) {
 	if ($ldap_connection->auth()->attempt($_POST['inputUsername'] . LDAP_ACCOUNT_SUFFIX, $_POST['inputPassword'], $stayAuthenticated = true)) {
 		// Successfully authenticated user.
@@ -52,7 +52,7 @@ if ($_SESSION['logon'] != true) {
 <!--<body>-->
 <body class="bg-light">
 	<?php include_once("views/navbar.php");
-	
+
 	$node = "nodes/index.php";
 	if (isset($_GET['n'])) {
 		$node = "nodes/" . $_GET['n'] . ".php";
