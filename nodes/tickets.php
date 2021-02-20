@@ -71,7 +71,7 @@ $teamMembers = $team->team_all_enabled();
 	}
 	?>
 
-	<h1>Weekly</h1>
+	<h1 class="mt-3">Weekly</h1>
 	<p>These tasks will appear on Zendesk at 00:00 every Monday morning.</p>
 	<?php
 	foreach($jobs_weekly AS $job) {
@@ -79,7 +79,7 @@ $teamMembers = $team->team_all_enabled();
 	}
 	?>
 
-	<h1>Monthly</h1>
+	<h1 class="mt-3">Monthly</h1>
 	<p>These tasks will appear on Zendesk at 00:00 on the 1st of every month.</p>
 	<?php
 	foreach($jobs_monthly AS $job) {
@@ -87,7 +87,7 @@ $teamMembers = $team->team_all_enabled();
 	}
 	?>
 
-	<h1>Yearly</h1>
+	<h1 class="mt-3">Yearly</h1>
 	<p>These tasks will appear on Zendesk at 00:00 once every year on the date(s) specified.</p>
 	<?php
 	foreach($jobs_yearly AS $job) {
@@ -195,7 +195,7 @@ function toggleFrequency2() {
 				</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 				<button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </div>
