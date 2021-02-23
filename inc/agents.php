@@ -54,7 +54,7 @@ public static function find_by_sql($sql="") {
 }
 
 
-public static function member($uid = null) {
+public static function agent($uid = null) {
 	global $database;
 
 	$sql  = "SELECT * FROM " . self::$table_name . " ";
@@ -139,8 +139,18 @@ public function create() {
 
 	// check if the database entry was successful (by attempting it)
 	if ($database->query($sql)) {
+		$logRecord = new logs();
+		$logRecord->description = "Successfully created agent '" . $this->firstname . " " . $this->lastname . "' (" . $this->zendesk_id . ")";
+		$logRecord->type = "admin";
+		$logRecord->log_record();
+
 		return true;
 	} else {
+		$logRecord = new logs();
+		$logRecord->description = "Error creating agent '" . $this->firstname . " " . $this->lastname . "' (" . $this->zendesk_id . ")";
+		$logRecord->type = "error";
+		$logRecord->log_record();
+
 		return false;
 	}
 }
@@ -154,22 +164,23 @@ public function delete() {
 
 	// check if the database entry was successful (by attempting it)
 	if ($database->query($sql)) {
+		$logRecord = new logs();
+		$logRecord->description = "Successfully deleted agent '" . $this->uid . "'";
+		$logRecord->type = "admin";
+		$logRecord->log_record();
+
 		return true;
 	} else {
+		$logRecord = new logs();
+		$logRecord->description = "Error deleting agent '" . $this->uid . "'";
+		$logRecord->type = "error";
+		$logRecord->log_record();
+
 		return false;
 	}
 }
 
-public function jobs_count() {
-	global $database;
-
-	$jobs = new jobs();
-	$jobsAssigned = $jobs->jobs_assigned($this->zendesk_id);
-
-	return count($jobsAssigned);
-}
-
-public function member_update() {
+public function update() {
 	global $database;
 
 	$sql  = "UPDATE " . self::$table_name . " ";
@@ -182,8 +193,18 @@ public function member_update() {
 	$sql .= "LIMIT 1;";
 
 	if ($database->query($sql)) {
+		$logRecord = new logs();
+		$logRecord->description = "Succesfully updated agent details for " . $this->firstname . " " . $this->lastname;
+		$logRecord->type = "admin";
+		$logRecord->log_record();
+
 		return true;
 	} else {
+		$logRecord = new logs();
+		$logRecord->description = "Error updating agent details for " . $this->firstname . " " . $this->lastname;
+		$logRecord->type = "error";
+		$logRecord->log_record();
+
 		return false;
 	}
 }

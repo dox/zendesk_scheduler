@@ -168,7 +168,7 @@ public static function jobs_involved_with($zendesk_id = null) {
 
 public function job_display() {
 	$agentsClass = new agents();
-	$agent = $agentsClass->member($this->assign_to);
+	$agent = $agentsClass->agent($this->assign_to);
 
 	if ($this->status == "Enabled") {
 		$class = "";

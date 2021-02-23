@@ -1,6 +1,6 @@
 <?php
 $agentsClass = new agents();
-$agent = $agentsClass->member($_GET['agentUID']);
+$agent = $agentsClass->agent($_GET['agentUID']);
 
 $jobs = new jobs();
 $jobsAssigned = $jobs->jobs_involved_with($agent->zendesk_id);
@@ -12,20 +12,9 @@ if (!empty($_POST)) {
 	$agent->zendesk_id = $_POST['inputZendeskID'];
 	$agent->enabled = $_POST['inputEnabled'];
 
-	if ($agent->member_update()) {
-		$logRecord = new logs();
-		$logRecord->description = "User details for " . $agent->firstname . " " . $agent->lastname . " modified";
-		$logRecord->type = "admin";
-		$logRecord->log_record();
-
-		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Member Updated!</div>";
+	if ($agent->update()) {
 	} else {
-		$logRecord = new logs();
-		$logRecord->description = "Error trying to modify details for " . $agent->firstname . " " . $agent->lastname . " (User id: " . $teamMember->zendesk_id . ")";
-		$logRecord->type = "error";
-		$logRecord->log_record();
-
-		$messages[] = "<div class=\"alert alert-danger\" role=\"alert\">Something went wrong, please contact IT Support</div>";
+		echo "ERROR!  Please check the log";
 	}
 }
 
@@ -102,7 +91,7 @@ if (!empty($_POST)) {
 <script>
 function deleteAgent() {
 	if (window.confirm("Are you sure you want to run delete this job?  This action cannot be undone!")) {
-			location.href = 'index.php?n=agents&memberDelete=<?php echo $agent->uid; ?>';
+			location.href = 'index.php?n=agents&agentDelete=<?php echo $agent->uid; ?>';
 	}
 }
 </script>

@@ -33,14 +33,13 @@ if (isset($_GET['import'])) {
 	}
 }
 
-if (isset($_GET['memberDelete'])) {
+if (isset($_GET['agentDelete'])) {
 	$agentDelete = new agents();
-	$agentDelete->uid = $_GET['memberDelete'];
+	$agentDelete->uid = $_GET['agentDelete'];
 
 	if ($agentDelete->delete()) {
-		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Agent Deleted</div>";
 	} else {
-		$messages[] = "<div class=\"alert alert-danger\" role=\"alert\">Something went wrong, please contact IT Support</div>";
+		echo "Something went wrong, please contact IT Support</div>";
 	}
 }
 ?>
