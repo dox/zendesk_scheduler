@@ -32,9 +32,8 @@ $logsAll = $logs->find_all();
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<td width="200px">Date</td>
-				<td>Description</td>
-				<td>Other</td>
+				<th width="200px">Date</th>
+				<th>Description</th>
 			</tr>
 		</thead>
 		<tbody>

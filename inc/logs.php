@@ -91,24 +91,35 @@ public function log_record() {
 }
 
 public function display_log() {
-	if ($this->type == "admin") {
-		$typeClass = "badge rounded-pill bg-primary";
-		$alertClass = "table-info";
-	} elseif ($this->type == "cron") {
-		$typeClass = "badge rounded-pill bg-success";
-		$alertClass = "";
-	} elseif ($this->type == "error") {
-		$typeClass = "badge rounded-pill bg-danger";
+	$successTypes = array("logon_success");
+	$primaryTypes = array("admin");
+	$warningTypes = array("logon_fail");
+	$dangerTypes = array("error");
+	$infoTypes = array("cron", "info");
+
+	if (in_array($this->type, $successTypes)) {
+		$typeClass = "bg-success";
+		$alertClass = "table-success";
+	} elseif (in_array($this->type, $primaryTypes)) {
+		$typeClass = "bg-primary";
+		$alertClass = "table-primary";
+	} elseif (in_array($this->type, $warningTypes)) {
+		$typeClass = "bg-warning";
+		$alertClass = "table-warning";
+	} elseif (in_array($this->type, $dangerTypes)) {
+		$typeClass = "bg-danger";
 		$alertClass = "table-danger";
+	} elseif (in_array($this->type, $infoTypes)) {
+		$typeClass = "bg-info";
+		$alertClass = "table-info";
 	} else {
-		$typeClass = "badge rounded-pill bg-warning";
+		$typeClass = "bg-dark";
 		$alertClass = "table-dark";
 	}
 
 	$output  = "<tr class=\"" . $alertClass . "\">";
 	$output .= "<td>" . date('Y-m-d H:i:s',strtotime($this->date_added)) . "</td>";
-	$output .= "<td>" . $this->description . "</td>";
-	$output .= "<td><span class=\"" . $typeClass  . "\">" . $this->type . "</span></td>";
+	$output .= "<td>" . $this->description . "<span class=\"badge rounded-pill float-end " . $typeClass  . "\">" . $this->type . "</span></td>";
 	$output .= "</tr>";
 
 	return $output;
