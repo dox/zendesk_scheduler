@@ -142,6 +142,18 @@ public static function jobs_assigned($zendesk_id = null) {
 	//return !empty($results) ? array_shift($results) : false;
 }
 
+public static function jobs_logged($zendesk_id = null) {
+	global $database;
+
+	$sql  = "SELECT * FROM " . self::$table_name . " ";
+	$sql .= "WHERE logged_by = '" . $zendesk_id . "';";
+
+	$results = self::find_by_sql($sql);
+
+	return $results;
+	//return !empty($results) ? array_shift($results) : false;
+}
+
 public static function jobs_involved_with($zendesk_id = null) {
 	global $database;
 
@@ -155,8 +167,8 @@ public static function jobs_involved_with($zendesk_id = null) {
 }
 
 public function job_display() {
-	$team = new team();
-	$teamMember = $team->member($this->assign_to);
+	$agentsClass = new agents();
+	$agent = $agentsClass->member($this->assign_to);
 
 	if ($this->status == "Enabled") {
 		$class = "";
@@ -171,7 +183,7 @@ public function job_display() {
 	$output .= "<h5 class=\"mb-1\">" . $subjectTitle . "</h5>";
 	$output .= "</div>";
 	$output .= "<p class=\"mb-1\">" . $this->body . "</p>";
-	$output .= "<span class=\"badge bg-primary rounded-pill float-end\">" . $this->type . "</span>" . "<small>Assign To: " . $teamMember->firstname . " " . $teamMember->lastname . "</small>";
+	$output .= "<span class=\"badge bg-primary rounded-pill float-end\">" . $this->type . "</span>" . "<small>Assign To: " . $agent->firstname . " " . $agent->lastname . "</small>";
 
 	if ($this->frequency == "Yearly") {
 		$output .= " on <small>" . strtoupper($this->frequency2) . "</small>";

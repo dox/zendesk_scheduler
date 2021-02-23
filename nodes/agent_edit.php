@@ -1,27 +1,27 @@
 <?php
-$team = new team();
-$teamMember = $team->member($_GET['member']);
+$agentsClass = new agents();
+$agent = $agentsClass->member($_GET['agentUID']);
 
 $jobs = new jobs();
-$jobsAssigned = $jobs->jobs_involved_with($teamMember->zendesk_id);
+$jobsAssigned = $jobs->jobs_involved_with($agent->zendesk_id);
 
 if (!empty($_POST)) {
-	$teamMember->firstname = $_POST['inputFirstname'];
-	$teamMember->lastname = $_POST['inputLastname'];
-	$teamMember->email = $_POST['inputEmail'];
-	$teamMember->zendesk_id = $_POST['inputZendeskID'];
-	$teamMember->enabled = $_POST['inputEnabled'];
+	$agent->firstname = $_POST['inputFirstname'];
+	$agent->lastname = $_POST['inputLastname'];
+	$agent->email = $_POST['inputEmail'];
+	$agent->zendesk_id = $_POST['inputZendeskID'];
+	$agent->enabled = $_POST['inputEnabled'];
 
-	if ($teamMember->member_update()) {
+	if ($agent->member_update()) {
 		$logRecord = new logs();
-		$logRecord->description = "User details for " . $teamMember->firstname . " " . $teamMember->lastname . " modified";
+		$logRecord->description = "User details for " . $agent->firstname . " " . $agent->lastname . " modified";
 		$logRecord->type = "admin";
 		$logRecord->log_record();
 
 		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Member Updated!</div>";
 	} else {
 		$logRecord = new logs();
-		$logRecord->description = "Error trying to modify details for " . $teamMember->firstname . " " . $teamMember->lastname . " (User id: " . $teamMember->zendesk_id . ")";
+		$logRecord->description = "Error trying to modify details for " . $agent->firstname . " " . $agent->lastname . " (User id: " . $teamMember->zendesk_id . ")";
 		$logRecord->type = "error";
 		$logRecord->log_record();
 
@@ -33,7 +33,7 @@ if (!empty($_POST)) {
 
 <div class="container">
 	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
-		<h1 class="display-4">Agent Modify <small class="text-muted"><?php echo $teamMember->firstname . " " . $teamMember->lastname; ?></small></h1>
+		<h1 class="display-4">Agent Modify <small class="text-muted"><?php echo $agent->firstname . " " . $agent->lastname; ?></small></h1>
 		<p class="lead"><?php echo $job->subject; ?></p>
 	</div>
 
@@ -61,25 +61,25 @@ if (!empty($_POST)) {
 		<div class="col-lg-6 mb-3">
 			<div class="mb-3">
 				<label for="inputFirstname" class="form-label">First Name</label>
-				<input type="text" class="form-control" name="inputFirstname" value="<?php echo $teamMember->firstname; ?>">
+				<input type="text" class="form-control" name="inputFirstname" value="<?php echo $agent->firstname; ?>">
 			</div>
 			<div class="mb-3">
 				<label for="inputLastname" class="form-label">Last Name</label>
-				<input type="text" class="form-control" name="inputLastname" value="<?php echo $teamMember->lastname; ?>">
+				<input type="text" class="form-control" name="inputLastname" value="<?php echo $agent->lastname; ?>">
 			</div>
 			<div class="mb-3">
 				<label for="inputEmail" class="form-label">Email Address</label>
-				<input type="email" class="form-control" name="inputEmail" value="<?php echo $teamMember->email; ?>">
+				<input type="email" class="form-control" name="inputEmail" value="<?php echo $agent->email; ?>">
 			</div>
 			<div class="mb-3">
 				<label for="inputZendeskID" class="form-label">Zendesk ID</label>
-				<input type="number" class="form-control" name="inputZendeskID" value="<?php echo $teamMember->zendesk_id; ?>">
+				<input type="number" class="form-control" name="inputZendeskID" value="<?php echo $agent->zendesk_id; ?>">
 			</div>
 			<div class="mb-3">
 				<label for="inputEnabled" class="form-label">User Account Status</label>
 				<select class="form-select" id="inputEnabled" name="inputEnabled" aria-label="Default select example">
-					<option value="1" <?php if ($teamMember->enabled == "1") { echo " selected";}?>>Enabled</option>
-					<option value="0" <?php if ($teamMember->enabled == "0") { echo " selected";}?>>Disabled</option>
+					<option value="1" <?php if ($agent->enabled == "1") { echo " selected";}?>>Enabled</option>
+					<option value="0" <?php if ($agent->enabled == "0") { echo " selected";}?>>Disabled</option>
 				</select>
 			</div>
 			<div class="d-grid gap-2">
@@ -102,7 +102,7 @@ if (!empty($_POST)) {
 <script>
 function deleteAgent() {
 	if (window.confirm("Are you sure you want to run delete this job?  This action cannot be undone!")) {
-			location.href = 'index.php?n=agents&memberDelete=<?php echo $teamMember->uid; ?>';
+			location.href = 'index.php?n=agents&memberDelete=<?php echo $agent->uid; ?>';
 	}
 }
 </script>

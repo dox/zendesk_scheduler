@@ -1,7 +1,7 @@
 <?php
 use Zendesk\API\HttpClient as ZendeskAPI;
 
-class team {
+class agents {
 
 protected static $table_name = "team";
 
@@ -67,69 +67,65 @@ public static function member($uid = null) {
 	return !empty($results) ? array_shift($results) : false;
 }
 
-public static function team_all() {
+public function getAgents($status = "all") {
 	global $database;
 
 	$sql  = "SELECT * FROM " . self::$table_name . " ";
+	if ($status == "enabled") {
+		$sql .= "WHERE enabled = '1' ";
+	} elseif ($status == "disabled") {
+		$sql .= "WHERE enabled = '0' ";
+	} else {
+	}
 
-	$results = self::find_by_sql($sql);
-
-	return $results;
-	//return !empty($results) ? array_shift($results) : false;
-}
-
-public static function team_all_enabled() {
-	global $database;
-
-	$sql  = "SELECT * FROM " . self::$table_name . " ";
-	$sql .= "WHERE enabled = '1' ";
 	$sql .= "ORDER BY lastname ASC";
 
-	$results = self::find_by_sql($sql);
+	$agents = self::find_by_sql($sql);
 
-	return $results;
-	//return !empty($results) ? array_shift($results) : false;
+	return $agents;
 }
 
-public static function team_all_disabled() {
-	global $database;
+public function displayMembers($status = "enabled") {
+	$agents_array = $this->getAgents($status);
 
-	$sql  = "SELECT * FROM " . self::$table_name . " ";
-	$sql .= "WHERE enabled = '0';";
+	$output  = "<table class=\"table\">";
+	$output .= "<thead>";
+	$output .= "<tr>";
+	$output .= "<th scope=\"col\">Name</th>";
+	$output .= "<th>Zendesk ID</th>";
+	$output .= "<th>Jobs Logged/Assigned</th>";
+	$output .= "<th scope=\"col\"></th>";
+	$output .= "</tr>";
+	$output .= "</thead>";
 
-	$results = self::find_by_sql($sql);
+	$output .= "<tbody>";
 
-	return $results;
-	//return !empty($results) ? array_shift($results) : false;
-}
+	foreach ($agents_array AS $agent) {
+		$agentEditURL = "index.php?n=agent_edit&agentUID=" . $agent->uid;
+		$jobsLogged = jobs::jobs_logged($agent->zendesk_id);
+		$jobsAssigned = jobs::jobs_assigned($agent->zendesk_id);
 
-public function member_display() {
-	global $assignUsers;
+		if ($agent->enabled == '1') {
+			$rowClass = "";
+		} else {
+			$rowClass = "table-secondary";
+		}
 
-	$totalJobsBadge .= "<span class=\"badge rounded-pill bg-primary float-end\">" . $this->jobs_count() . autoPluralise(' job', ' jobs', $this->jobs_count()) . "</span>";
+		$output .= "<tr class=\"" . $rowClass . "\">";
+		$output .= "<td>" . $agent->firstname . " " . $agent->lastname . "</td>";
+		$output .= "<td>" . $agent->zendesk_id . "</td>";
+		$output .= "<td><span class=\"badge bg-primary\">" . count($jobsLogged) . "</span> / <span class=\"badge bg-success\">" . count($jobsAssigned) . "<span></td>";
+		$output .= "<td><a href=\"" . $agentEditURL . "\">View/Edit</a></td>";
+		$output .= "</tr>";
+	}
 
-	$output  = "<div class=\"col\">";
-	$output .= "<div class=\"card\">";
-
-	$output .= "<div class=\"card-header\">" . $this->firstname . " " . $this->lastname . $totalJobsBadge . "</div>";
-	//$output .= "<img src=\"...\" class=\"card-img-top\" alt=\"...\">";
-	$output .= "<div class=\"card-body\">";
-	$output .= "<p class=\"card-text text-nowrap\">" . $this->email . "</p>";
-	$output .= "<ul class=\"list-group list-group-flush\">";
-	//$output .= "<li class=\"list-group-item\">Jobs: " . $this->jobs_count() . "</li>";
-	$output .= "</ul>";
-	$output .= "</div>";
-
-	$button = "<a href=\"index.php?n=agent_edit&member=" . $this->uid . "\" class=\"btn btn-sm btn-outline-primary float-right\">Modify</a>";
-	$output .= "<div class=\"card-footer\">" . $totalJobsText . $button . "</div>";
-
-	$output .= "</div>";
-	$output .= "</div>";
+	$output .= "</tbody>";
+	$output .= "</table>";
 
 	return $output;
 }
 
-public function team_create() {
+public function create() {
 	global $database;
 
 	$sql  = "INSERT INTO " . self::$table_name . " (";
@@ -149,7 +145,7 @@ public function team_create() {
 	}
 }
 
-public function member_delete() {
+public function delete() {
 	global $database;
 
 	$sql  = "DELETE FROM " . self::$table_name . " ";
@@ -192,7 +188,7 @@ public function member_update() {
 	}
 }
 
-public function getAgents() {
+public function getZendeskAgents() {
 	$subdomain = zd_subdomain;
 	$username  = zd_username;
 	$token     = zd_token;
@@ -207,7 +203,7 @@ public function getAgents() {
 
 		$logRecord = new logs();
 		$logRecord->description = "Successfully searched Zendesk for agents";
-		$logRecord->type = "cron";
+		$logRecord->type = "info";
 		$logRecord->log_record();
 
 		return $users->users;

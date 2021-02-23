@@ -40,6 +40,6 @@ try {
 
 require_once($root . '/inc/database.php');
 require_once($root . '/inc/jobs.php');
-require_once($root . '/inc/team.php');
+require_once($root . '/inc/agents.php');
 require_once($root . '/inc/logs.php');
 ?>

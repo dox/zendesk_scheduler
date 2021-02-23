@@ -1,52 +1,48 @@
 <?php
-$team = new team();
+$agentsClass = new agents();
 
 if (!empty($_POST)) {
-	$jobCreate = new team();
-	$jobCreate->firstname = $_POST['inputFirstname'];
-	$jobCreate->lastname = $_POST['inputLastname'];
-	$jobCreate->email = $_POST['inputEmail'];
-	$jobCreate->zendesk_id = $_POST['inputZendeskID'];
-	$jobCreate->enabled = $_POST['inputEnabled'];
-	$jobCreate->team_create();
+	$agentCreate = new agents();
+	$agentCreate->firstname = $_POST['inputFirstname'];
+	$agentCreate->lastname = $_POST['inputLastname'];
+	$agentCreate->email = $_POST['inputEmail'];
+	$agentCreate->zendesk_id = $_POST['inputZendeskID'];
+	$agentCreate->enabled = $_POST['inputEnabled'];
+	$agentCreate->create();
 }
 
 if (isset($_GET['import'])) {
-	foreach ($team->team_all() AS $teamMember) {
-		$teamMembersZDidArray[] = $teamMember->zendesk_id;
+	foreach ($agentsClass->getAgents("all") AS $agent) {
+		$teamMembersZDidArray[] = $agent->zendesk_id;
 	}
 
-	foreach ($team->getAgents() AS $zdAgent) {
+	foreach ($agentsClass->getZendeskAgents() AS $zdAgent) {
 		if (in_array($zdAgent->id, $teamMembersZDidArray)) {
 			// user already in local database
 		} else {
 			// user doesn't exist locally
 
-			$agentCreate = new team();
+			$agentCreate = new agents();
 			$agentCreate->firstname = $zdAgent->name;
 			//$agentCreate->lastname = $zdAgent->name;
 			$agentCreate->email = $zdAgent->email;
 			$agentCreate->zendesk_id = $zdAgent->id;
 			$agentCreate->enabled = "1";
-			$agentCreate->team_create();
+			$agentCreate->create();
 		}
 	}
 }
 
 if (isset($_GET['memberDelete'])) {
-	$teamDelete = new team();
-	$teamDelete->uid = $_GET['memberDelete'];
+	$agentDelete = new agents();
+	$agentDelete->uid = $_GET['memberDelete'];
 
-	if ($teamDelete->member_delete()) {
-		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Team Member Deleted</div>";
+	if ($agentDelete->delete()) {
+		$messages[] = "<div class=\"alert alert-success\" role=\"alert\">Agent Deleted</div>";
 	} else {
 		$messages[] = "<div class=\"alert alert-danger\" role=\"alert\">Something went wrong, please contact IT Support</div>";
 	}
 }
-
-
-$teamMembersEnabled = $team->team_all_enabled();
-$teamMembersDisabled = $team->team_all_disabled();
 ?>
 
 <div class="container">
@@ -64,24 +60,16 @@ $teamMembersDisabled = $team->team_all_disabled();
 		</a>
 	</div>
 
-	<div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
-		<?php
-		foreach($teamMembersEnabled AS $member) {
-			echo $member->member_display();
-		}
-		?>
+	<div class="row mb-3">
+		<?php echo $agentsClass->displayMembers("enabled"); ?>
 	</div>
 
-	<hr />
 
 	<h4>Previous Team Members</h4>
-	<div class="row row-cols-1 row-cols-md-3 g-4">
-		<?php
-		foreach($teamMembersDisabled AS $member) {
-			echo $member->member_display();
-		}
-		?>
+	<div class="row mb-3">
+		<?php echo $agentsClass->displayMembers("disabled"); ?>
 	</div>
+
 </div>
 
 

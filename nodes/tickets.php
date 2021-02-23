@@ -11,7 +11,7 @@ if (!empty($_POST)) {
 	$jobCreate->assign_to = $_POST['inputAssignTo'];
 	$jobCreate->logged_by = $_POST['inputLoggedBy'];
 	$jobCreate->cc = $_POST['inputCC'];
-	$jobCreate->status = 'Enaled';
+	$jobCreate->status = 'Enabled';
 	$jobCreate->job_create();
 }
 
@@ -44,9 +44,7 @@ $jobs_weekly = $jobs->jobs_weekly();
 $jobs_monthly = $jobs->jobs_monthly();
 $jobs_yearly = $jobs->jobs_yearly();
 
-$team = new team();
-$teamMembers = $team->team_all_enabled();
-
+$agentsClass = new agents();
 ?>
 
 <div class="container">
@@ -149,8 +147,8 @@ function toggleFrequency2() {
 					<label for="inputLoggedBy" class="form-label">Ticket Logged By</label>
 					<select class="form-select" id="inputLoggedBy" name="inputLoggedBy">
 						<?php
-						foreach ($teamMembers AS $member) {
-							$output  = "<option value=\"" . $member->zendesk_id . "\">" . $member->firstname . " " . $member->lastname . "</option>";
+						foreach ($agentsClass->getAgents("all") AS $agent) {
+							$output  = "<option value=\"" . $agent->zendesk_id . "\">" . $agent->firstname . " " . $agent->lastname . "</option>";
 
 							echo $output;
 						}
@@ -161,8 +159,8 @@ function toggleFrequency2() {
 					<label for="inputAssignTo" class="form-label">Auto-assign To Agent</label>
 					<select class="form-select" id="inputAssignTo" name="inputAssignTo">
 						<?php
-						foreach ($teamMembers AS $member) {
-							$output  = "<option value=\"" . $member->zendesk_id . "\">" . $member->firstname . " " . $member->lastname . "</option>";
+						foreach ($agentsClass->getAgents("all") AS $agent) {
+							$output  = "<option value=\"" . $agent->zendesk_id . "\">" . $agent->firstname . " " . $agent->lastname . "</option>";
 
 							echo $output;
 						}

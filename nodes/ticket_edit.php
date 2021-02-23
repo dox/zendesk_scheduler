@@ -2,8 +2,7 @@
 $jobs = new jobs();
 $job = $jobs->job($_GET['job']);
 
-$team = new team();
-$teamMembers = $team->team_all_enabled();
+$agentsClass = new agents();
 
 if (!empty($_POST)) {
 	$job->subject = $_POST['inputSubject'];
@@ -73,12 +72,12 @@ if (!empty($_POST)) {
 		<label for="inputLoggedBy" class="form-label">Ticket Logged By</label>
 		<select class="form-select" id="inputLoggedBy" name="inputLoggedBy">
 			<?php
-			foreach ($teamMembers AS $member) {
-				$output  = "<option value=\"" . $member->zendesk_id . "\"";
-				if ($job->logged_by == $member->zendesk_id) {
+			foreach ($agentsClass->getAgents("all") AS $agent) {
+				$output  = "<option value=\"" . $agent->zendesk_id . "\"";
+				if ($job->logged_by == $agent->zendesk_id) {
 					$output .= " selected";
 				}
-				$output .= ">" . $member->firstname . " " . $member->lastname . "</option>";
+				$output .= ">" . $agent->firstname . " " . $agent->lastname . "</option>";
 
 				echo $output;
 			}
@@ -89,12 +88,12 @@ if (!empty($_POST)) {
 		<label for="inputAssignTo" class="form-label">Auto-assign To Agent</label>
 		<select class="form-select" id="inputAssignTo" name="inputAssignTo">
 			<?php
-			foreach ($teamMembers AS $member) {
-				$output  = "<option value=\"" . $member->zendesk_id . "\"";
-				if ($job->assign_to == $member->zendesk_id) {
+			foreach ($agentsClass->getAgents("all") AS $agent) {
+				$output  = "<option value=\"" . $agent->zendesk_id . "\"";
+				if ($job->assign_to == $agent->zendesk_id) {
 					$output .= " selected";
 				}
-				$output .= ">" . $member->firstname . " " . $member->lastname . "</option>";
+				$output .= ">" . $agent->firstname . " " . $agent->lastname . "</option>";
 
 				echo $output;
 			}
