@@ -1,12 +1,11 @@
 <div class="container">
-	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
-		<h1 class="display-4">Zendesk Scheduler</h1>
-		<p class="lead">A simple web-based utility to create and manage reoccurring Zendesk ticket creation.</p>
-	</div>
+	<?php
+	$title = "Zendesk Scheduler";
+	$subtitle = "A simple web-based utility to create and manage reoccurring Zendesk ticket creation.";
+	$icons[] = array("class" => "btn-primary", "name" => "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#zendesk\"/></svg> View Zendesk", "value" => "onclick=\"location.href='" . zd_url . "'\"");
 
-	<div class="pb-3 text-end">
-		<a class="btn btn-primary" href="<?php echo zd_url; ?>" role="button"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#zendesk"/></svg> View Zendesk</a>
-	</div>
+	echo makeTitle($title, $subtitle, $icons);
+	?>
 
 	<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
     <div class="col">

@@ -21,29 +21,13 @@ if (!empty($_POST)) {
 ?>
 
 <div class="container">
-	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
-		<h1 class="display-4">Agent Modify <small class="text-muted"><?php echo $agent->firstname . " " . $agent->lastname; ?></small></h1>
-		<p class="lead"><?php echo $job->subject; ?></p>
-	</div>
+	<?php
+	$title = "Agent Modify";
+	$subtitle = $agent->firstname . " " . $agent->lastname;
+	$icons[] = array("class" => "btn-danger", "name" => "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#delete\"/></svg> Delete Agent", "value" => "data-bs-toggle=\"modal\" data-bs-target=\"#agentDeleteModal\"");
 
-	<div class="pb-3 text-end">
-		<?php
-		if (count($jobsAssigned) == 0) {
-			$disabled = "";
-			$message = "";
-			//echo "<button id=\"deleteJob\" type=\"submit\" class=\"btn btn-danger\">Delete</button>";
-		} else {
-			$disabled = " disabled ";
-			$message = "<p>* User cannot be deleted when there are jobs assigned to/logged by them</p>";
-			//echo "<button id=\"deleteJob\" disabled type=\"submit\" class=\"btn btn-danger\">Delete</button>";
-			//echo "<p>* User cannot be deleted when there are jobs assigned to/logged by them</p>";
-		}
-		?>
-		<a class="btn btn-danger <?php echo $disabled; ?>" id="deleteJob" href="#" role="button" onclick="deleteAgent();">
-			<svg width="1em" height="1em"><use xlink:href="inc/icons.svg#delete"/></svg> Delete
-		</a>
-		<?php echo $message; ?>
-	</div>
+	echo makeTitle($title, $subtitle, $icons);
+	?>
 
 	<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 	<div class="row">
@@ -88,10 +72,35 @@ if (!empty($_POST)) {
 	</form>
 </div>
 
-<script>
-function deleteAgent() {
-	if (window.confirm("Are you sure you want to run delete this job?  This action cannot be undone!")) {
-			location.href = 'index.php?n=agents&agentDelete=<?php echo $agent->uid; ?>';
-	}
-}
-</script>
+<!-- Modal -->
+<div class="modal fade" id="agentDeleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="index.php?n=agents&agentDelete=<?php echo $agent->uid; ?>" method="post">
+			<div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Delete Agent</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+				<?php
+				if (count($jobsAssigned) == 0) {
+					$disabled = "";
+					$output  = "<p>Are you sure you want to delete this agent from the Zendesk Scheduler?  This will not delete the agent from Zendesk.</p>";
+					$output .= "<p class=\"text-danger\"><strong>WARNING!</strong> This action cannot be undone!</p>";
+				} else {
+					$disabled = " disabled ";
+					$output  = "<p>* User cannot be deleted when there are jobs assigned to/logged by them</p>";
+				}
+
+				echo $output;
+				?>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link text-muted" data-bs-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-danger" <?php echo $disabled; ?>>Delete Agent</button>
+      </div>
+    </div>
+		</form>
+  </div>
+</div>

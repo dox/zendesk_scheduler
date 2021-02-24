@@ -48,18 +48,13 @@ $agentsClass = new agents();
 ?>
 
 <div class="container">
-	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
-		<h1 class="display-4"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#tickets"/></svg> Tickets</h1>
-		<p class="lead">Daily, weekly, monthly and yearly tickets that are auto-scheduled to appear on Zendesk.</p>
-	</div>
+	<?php
+	$title = "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#tickets\"/></svg> Tickets";
+	$subtitle = "Daily, weekly, monthly and yearly tickets that are auto-scheduled to appear on Zendesk.";
+	$icons[] = array("class" => "btn-primary", "name" => "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#tickets\"/></svg> Add Ticket", "value" => "data-bs-toggle=\"modal\" data-bs-target=\"#ticketAddModal\"");
 
-	<div class="pb-3 text-end">
-		<a class="btn btn-primary" href="index.php?n=admin_meal" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-			<svg width="1em" height="1em"><use xlink:href="inc/icons.svg#tickets"/></svg> Add new
-		</a>
-	</div>
-
-
+	echo makeTitle($title, $subtitle, $icons);
+	?>
 
 	<h1>Daily</h1>
 	<p>These tasks will appear on Zendesk at 00:00 every day (Monday - Friday).</p>
@@ -109,13 +104,13 @@ function toggleFrequency2() {
 
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="ticketAddModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 			<div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Add New Scheduled Ticket</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
 				<div class="mb-3">
@@ -193,8 +188,8 @@ function toggleFrequency2() {
 				</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-link text-muted" data-bs-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Add Ticket</button>
       </div>
     </div>
 		</form>

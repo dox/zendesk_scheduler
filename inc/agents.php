@@ -78,7 +78,7 @@ public function getAgents($status = "all") {
 	} else {
 	}
 
-	$sql .= "ORDER BY lastname ASC";
+	$sql .= "ORDER BY enabled DESC, lastname ASC";
 
 	$agents = self::find_by_sql($sql);
 
@@ -93,8 +93,8 @@ public function displayMembers($status = "enabled") {
 	$output .= "<tr>";
 	$output .= "<th scope=\"col\">Name</th>";
 	$output .= "<th>Zendesk ID</th>";
-	$output .= "<th>Jobs Logged/Assigned</th>";
-	$output .= "<th scope=\"col\"></th>";
+	$output .= "<th>Email</th>";
+	$output .= "<th><span class=\"float-end\">Jobs Logged/Assigned</span></th>";
 	$output .= "</tr>";
 	$output .= "</thead>";
 
@@ -112,10 +112,10 @@ public function displayMembers($status = "enabled") {
 		}
 
 		$output .= "<tr class=\"" . $rowClass . "\">";
-		$output .= "<td>" . $agent->firstname . " " . $agent->lastname . "</td>";
+		$output .= "<td><a href=\"" . $agentEditURL . "\">" . $agent->firstname . " " . $agent->lastname . "</a> <a href=\"" . $agentEditURL . "\"><svg class=\"float-end\" width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#edit\"/></svg></a></td>";
 		$output .= "<td>" . $agent->zendesk_id . "</td>";
-		$output .= "<td><span class=\"badge bg-primary\">" . count($jobsLogged) . "</span> / <span class=\"badge bg-success\">" . count($jobsAssigned) . "<span></td>";
-		$output .= "<td><a href=\"" . $agentEditURL . "\">View/Edit</a></td>";
+		$output .= "<td>" . $agent->email . "</td>";
+		$output .= "<td><span class=\"float-end\"><span class=\"badge bg-primary\">" . count($jobsLogged) . "</span> / <span class=\"badge bg-success\">" . count($jobsAssigned) . "<span></span></td>";
 		$output .= "</tr>";
 	}
 

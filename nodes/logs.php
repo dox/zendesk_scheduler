@@ -5,11 +5,14 @@ $logsAll = $logs->find_all();
 ?>
 
 <div class="container">
-	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
-		<h1 class="display-4"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#logs"/></svg> Logs</h1>
-		<p class="lead">Logs for cron tasks, ticket creation and agent changes.</p>
-	</div>
+	<?php
+	$title = "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#logs\"/></svg> Logs";
+	$subtitle = "Logs for cron tasks, ticket creation and agent changes.";
+	//$icons[] = array("class" => "btn-primary", "name" => "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#zendesk\"/></svg> View Zendesk", "value" => "onclick=\"location.href='" . zd_url . "'\"");
 
+	echo makeTitle($title, $subtitle, $icons);
+	?>
+	
 	<div class="mb-3">
 		<p>Example <b>crontab -e</b>:</p>
 

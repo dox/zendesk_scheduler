@@ -26,10 +26,15 @@ if (!empty($_POST)) {
 ?>
 
 <div class="container">
-	<div class="px-3 py-3 pt-md-5 pb-md-4 text-center">
-		<h1 class="display-4">Ticket Modify <small class="text-muted">[uid:<?php echo $job->uid; ?>]</small></h1>
-		<p class="lead"><?php echo $job->subject; ?></p>
-	</div>
+	<?php
+	$title = "Ticket Modify";
+	$subtitle = $job->subject;
+	$icons[] = array("class" => "btn-warning", "name" => "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#run-now\"/></svg> Run Now", "value" => "onclick=\"runJob();\"");
+	$icons[] = array("class" => "btn-danger", "name" => "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#delete\"/></svg> Delete Ticket", "value" => "data-bs-toggle=\"modal\" data-bs-target=\"#ticketDeleteModal\"");
+
+	echo makeTitle($title, $subtitle, $icons);
+	?>
+
 
 	<div class="pb-3 text-end">
 		<a class="btn btn-warning" id="runJob" href="#" role="button" onclick="runJob();">
@@ -138,13 +143,30 @@ if (!empty($_POST)) {
 </div>
 
 
-<script>
-function deleteJob() {
-	if (window.confirm("Are you sure you want to run delete this job?  This action cannot be undone!")) {
-			location.href = 'index.php?n=tickets&jobDelete=<?php echo $job->uid; ?>';
-	}
-}
+<!-- Modal -->
+<div class="modal fade" id="ticketDeleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="index.php?n=tickets&jobDelete=<?php echo $job->uid; ?>" method="post">
+			<div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Delete Ticket</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+				<p>Are you sure you want to delete this ticket from the Zendesk Scheduler?  This will not delete any existing tickets on Zendesk.</p>
+				<p class="text-danger"><strong>WARNING!</strong> This action cannot be undone!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link text-muted" data-bs-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-danger">Delete Ticket</button>
+      </div>
+    </div>
+		</form>
+  </div>
+</div>
 
+
+<script>
 function runJob() {
 	if (window.confirm("Are you sure you want to run this job now?")) {
 			location.href = 'index.php?n=tickets&jobRun=<?php echo $job->uid; ?>';
