@@ -49,8 +49,15 @@ if (!empty($_POST)) {
 				<input type="number" class="form-control" name="inputZendeskID" value="<?php echo $agent->zendesk_id; ?>">
 			</div>
 			<div class="mb-3">
+				<?php
+				if (count($jobsAssigned) == 0) {
+					$disabled = "";
+				} else {
+					$disabled = " disabled";
+				}
+				?>
 				<label for="inputEnabled" class="form-label">User Account Status</label>
-				<select class="form-select" id="inputEnabled" name="inputEnabled" aria-label="Default select example">
+				<select class="form-select" id="inputEnabled" name="inputEnabled" aria-label="Default select example" <?php echo $disabled; ?>>
 					<option value="1" <?php if ($agent->enabled == "1") { echo " selected";}?>>Enabled</option>
 					<option value="0" <?php if ($agent->enabled == "0") { echo " selected";}?>>Disabled</option>
 				</select>

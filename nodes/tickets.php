@@ -142,7 +142,7 @@ function toggleFrequency2() {
 					<label for="inputLoggedBy" class="form-label">Ticket Logged By</label>
 					<select class="form-select" id="inputLoggedBy" name="inputLoggedBy">
 						<?php
-						foreach ($agentsClass->getAgents("all") AS $agent) {
+						foreach ($agentsClass->getAgents("enabled") AS $agent) {
 							$output  = "<option value=\"" . $agent->zendesk_id . "\">" . $agent->firstname . " " . $agent->lastname . "</option>";
 
 							echo $output;
@@ -154,7 +154,7 @@ function toggleFrequency2() {
 					<label for="inputAssignTo" class="form-label">Auto-assign To Agent</label>
 					<select class="form-select" id="inputAssignTo" name="inputAssignTo">
 						<?php
-						foreach ($agentsClass->getAgents("all") AS $agent) {
+						foreach ($agentsClass->getAgents("enabled") AS $agent) {
 							$output  = "<option value=\"" . $agent->zendesk_id . "\">" . $agent->firstname . " " . $agent->lastname . "</option>";
 
 							echo $output;
