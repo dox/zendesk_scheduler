@@ -189,7 +189,7 @@ function toggleFrequency2() {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-link text-muted" data-bs-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Add Ticket</button>
+				<button type="submit" class="btn btn-primary"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#tickets"/></svg> Add Ticket</button>
       </div>
     </div>
 		</form>

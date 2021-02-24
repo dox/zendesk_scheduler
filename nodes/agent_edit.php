@@ -22,7 +22,7 @@ if (!empty($_POST)) {
 
 <div class="container">
 	<?php
-	$title = "Agent Modify";
+	$title = "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#agents\"/></svg> Agent Modify";
 	$subtitle = $agent->firstname . " " . $agent->lastname;
 	$icons[] = array("class" => "btn-danger", "name" => "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#delete\"/></svg> Delete Agent", "value" => "data-bs-toggle=\"modal\" data-bs-target=\"#agentDeleteModal\"");
 
@@ -105,7 +105,7 @@ if (!empty($_POST)) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-link text-muted" data-bs-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-danger" <?php echo $disabled; ?>>Delete Agent</button>
+				<button type="submit" class="btn btn-danger" <?php echo $disabled; ?>><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#delete"/></svg> Delete Agent</button>
       </div>
     </div>
 		</form>

@@ -27,7 +27,7 @@ if (!empty($_POST)) {
 
 <div class="container">
 	<?php
-	$title = "Ticket Modify";
+	$title = "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#tickets\"/></svg> Ticket Modify";
 	$subtitle = $job->subject;
 	$icons[] = array("class" => "btn-warning", "name" => "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#run-now\"/></svg> Run Now", "value" => "onclick=\"runJob();\"");
 	$icons[] = array("class" => "btn-danger", "name" => "<svg width=\"1em\" height=\"1em\"><use xlink:href=\"inc/icons.svg#delete\"/></svg> Delete Ticket", "value" => "data-bs-toggle=\"modal\" data-bs-target=\"#ticketDeleteModal\"");
@@ -148,7 +148,7 @@ if (!empty($_POST)) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-link text-muted" data-bs-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-danger">Delete Ticket</button>
+				<button type="submit" class="btn btn-danger"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#delete"/></svg> Delete Ticket</button>
       </div>
     </div>
 		</form>

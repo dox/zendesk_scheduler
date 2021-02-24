@@ -96,7 +96,7 @@ if (isset($_GET['agentDelete'])) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-link text-muted" data-bs-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Add Agent</button>
+				<button type="submit" class="btn btn-primary"><svg width="1em" height="1em"><use xlink:href="inc/icons.svg#agents"/></svg> Add Agent</button>
       </div>
     </div>
 		</form>
