@@ -35,16 +35,6 @@ if (!empty($_POST)) {
 	echo makeTitle($title, $subtitle, $icons);
 	?>
 
-
-	<div class="pb-3 text-end">
-		<a class="btn btn-warning" id="runJob" href="#" role="button" onclick="runJob();">
-			<svg width="1em" height="1em"><use xlink:href="inc/icons.svg#run-now"></svg> Run Now
-		</a>
-		<a class="btn btn-danger" id="deleteJob" href="#" role="button" onclick="deleteJob();">
-			<svg width="1em" height="1em"><use xlink:href="inc/icons.svg#delete"/></svg> Delete
-		</a>
-	</div>
-
 	<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
 	<div class="mb-3">
 		<label for="inputSubject" class="form-label">Ticket Subject</label>
