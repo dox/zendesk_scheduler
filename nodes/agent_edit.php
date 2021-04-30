@@ -10,7 +10,13 @@ if (!empty($_POST)) {
 	$agent->lastname = $_POST['inputLastname'];
 	$agent->email = $_POST['inputEmail'];
 	$agent->zendesk_id = $_POST['inputZendeskID'];
-	$agent->enabled = $_POST['inputEnabled'];
+
+	// check for diabled 'enabled/disabled status'
+	if (!isset($_POST['inputEnabled'])) {
+		$agent->enabled = '1';
+	} else {
+		$agent->enabled = $_POST['inputEnabled'];
+	}
 
 	if ($agent->update()) {
 	} else {
